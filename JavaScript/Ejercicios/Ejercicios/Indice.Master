@@ -1,0 +1,21 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Indice.master.cs" Inherits="Ejercicios.Indice" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ejercicios JavaScript</title>
+    <asp:ContentPlaceHolder ID="cph_Encabezado" runat="server">
+        <script type="text/javascript" src="Scripts/Indice.js?v=<%=Guid.NewGuid().ToString()%>"></script>
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="frm_Indice" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="cph_Cuerpo" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
