@@ -1,0 +1,10 @@
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\bin\Release\Calculadora.exe
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\bin\Release\Calculadora.pdb
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\bin\Release\Calculadora.xml
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\ResolveAssemblyReference.cache
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\Calculadora.frmCalculadora.resources
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\Calculadora.Resources.resources
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\Calculadora.vbproj.GenerateResource.Cache
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\Calculadora.exe
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\Calculadora.xml
+D:\Desarrollo\Visual Basic .NET\Calculadora\Calculadora\obj\Release\Calculadora.pdb
