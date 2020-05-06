@@ -1,0 +1,9 @@
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Datos.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Datos.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Entidades.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Entidades.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csprojAssemblyReference.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csproj.CoreCompileInputs.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csproj.CopyComplete

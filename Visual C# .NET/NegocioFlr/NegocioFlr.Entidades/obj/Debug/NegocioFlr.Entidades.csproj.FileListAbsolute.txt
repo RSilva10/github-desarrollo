@@ -1,0 +1,6 @@
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\bin\Debug\NegocioFlr.Entidades.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\bin\Debug\NegocioFlr.Entidades.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.csprojAssemblyReference.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.csproj.CoreCompileInputs.cache

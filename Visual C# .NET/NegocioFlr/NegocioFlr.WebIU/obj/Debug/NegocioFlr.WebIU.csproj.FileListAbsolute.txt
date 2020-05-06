@@ -1,0 +1,14 @@
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.WebIU.dll.config
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.WebIU.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.WebIU.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Entidades.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Negocio.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Datos.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Entidades.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Negocio.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Datos.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csprojAssemblyReference.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csproj.CoreCompileInputs.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csproj.CopyComplete

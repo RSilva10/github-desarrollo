@@ -1,0 +1,11 @@
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Negocio.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Negocio.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Datos.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Entidades.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Datos.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Entidades.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.dll
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.pdb
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csprojAssemblyReference.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csproj.CoreCompileInputs.cache
+D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csproj.CopyComplete
