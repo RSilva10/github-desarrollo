@@ -1,0 +1,9 @@
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\bin\Debug\NFlrClient.exe.config
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\bin\Debug\NFlrClient.exe
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\bin\Debug\NFlrClient.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Debug\NFlrClient.frm_Utilerias.resources
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Debug\NFlrClient.Properties.Resources.resources
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Debug\NFlrClient.csproj.GenerateResource.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Debug\NFlrClient.csproj.CoreCompileInputs.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Debug\NFlrClient.exe
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Debug\NFlrClient.pdb

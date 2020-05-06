@@ -1,0 +1,10 @@
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\bin\Release\NFlrClient.exe.config
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\bin\Release\NFlrClient.exe
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\bin\Release\NFlrClient.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.csprojAssemblyReference.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.frm_Utilerias.resources
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.Properties.Resources.resources
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.csproj.GenerateResource.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.csproj.CoreCompileInputs.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.exe
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NFlrClient\obj\Release\NFlrClient.pdb
