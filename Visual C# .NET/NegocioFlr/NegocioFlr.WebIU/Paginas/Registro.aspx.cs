@@ -16,7 +16,8 @@ namespace NegocioFlr.WebIU.Paginas
         private Regex _Correo_valido = new Regex("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$");
         private Usuarios _objUsuarios = new Usuarios();
         private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
-        private String _Estatus;
+        private Int32 _Codigo;
+        private String _Mensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,13 +45,15 @@ namespace NegocioFlr.WebIU.Paginas
             _objUsuarios.Cor_reo = this.txt_Correo.Value;
             _objUsuarios.Ali_Cli = this.txt_Alias.Value;
 
-            _Resultado = _objNegocioUsuario.registra_Usuario(_objUsuarios, ref _Estatus);             
-            if (_Estatus != null)
+            if (!_objNegocioUsuario.registra_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje))
             {
-                muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡"); 
+                muestra_Mensaje("!! " + _Codigo.ToString() + ": " + _Mensaje.Trim() + " ... ¡¡"); 
             }
             else
             {
+                //  Aqui se debe generar el archivo de texto ...
+
+
                 muestra_Mensaje("!! Su contraseña temporal es: " + _objUsuarios.genera_Pwd + " ... ¡¡");
             }
         }

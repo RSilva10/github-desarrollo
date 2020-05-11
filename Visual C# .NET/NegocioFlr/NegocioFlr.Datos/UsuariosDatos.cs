@@ -180,6 +180,7 @@ namespace NegocioFlr.Datos
                 _Parametro2.DbType = System.Data.DbType.String;
                 _Parametro2.Direction = System.Data.ParameterDirection.Input;
                 _Parametro2.ParameterName = "@Pas_Usr";
+                _Parametro2.Value = _usuarios.genera_Pwd;
                 _Parametro2.Value = _usuarios.encripta_Pwd;
                 //  Apellido paterno
                 SqlParameter _Parametro3 = new SqlParameter();
@@ -217,6 +218,24 @@ namespace NegocioFlr.Datos
                 _Parametro8.Direction = System.Data.ParameterDirection.Input;
                 _Parametro8.ParameterName = "@Cor_reo";
                 _Parametro8.Value = _usuarios.Cor_reo;
+                //  Clave del cliente
+                SqlParameter _Parametro9 = new SqlParameter();
+                _Parametro9.DbType = System.Data.DbType.String;
+                _Parametro9.Direction = System.Data.ParameterDirection.Input;
+                _Parametro9.ParameterName = "@Ali_Cli";
+                _Parametro9.Value = _usuarios.Ali_Cli;
+                //  Código de error
+                SqlParameter _Parametro10 = new SqlParameter();
+                _Parametro10.DbType = System.Data.DbType.Int32;
+                _Parametro10.Direction = System.Data.ParameterDirection.Output;
+                _Parametro10.Size = 4;
+                _Parametro10.ParameterName = "@Cod_Err";
+                //  Descripción de error
+                SqlParameter _Parametro11 = new SqlParameter();
+                _Parametro11.DbType = System.Data.DbType.String;
+                _Parametro11.Direction = System.Data.ParameterDirection.Output;
+                _Parametro11.Size = 100;
+                _Parametro11.ParameterName = "@Des_Err";
 
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -230,13 +249,27 @@ namespace NegocioFlr.Datos
                 _Comando.Parameters.Add(_Parametro6);
                 _Comando.Parameters.Add(_Parametro7);
                 _Comando.Parameters.Add(_Parametro8);
+                _Comando.Parameters.Add(_Parametro9);
+                _Comando.Parameters.Add(_Parametro10);
+                _Comando.Parameters.Add(_Parametro11);
                 _Comando.ExecuteNonQuery();
 
-                _Resultado = true;
+                _Codigo = Convert.ToInt32(_Comando.Parameters["@Cod_Err"].Value);
+                _Mensaje = _Comando.Parameters["@Des_Err"].Value.ToString();
+
+                if (_Codigo == 0)
+                {
+                    _Resultado = true;
+                }
+                else
+                {
+                    _Resultado = false;
+                }
             }
             catch (SqlException Error)
             {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
+                _Codigo = Error.ErrorCode;
+                _Mensaje = Error.Message;
                 _Resultado = false;
             }
             finally

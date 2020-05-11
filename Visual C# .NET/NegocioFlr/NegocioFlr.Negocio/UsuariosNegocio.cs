@@ -24,9 +24,9 @@ namespace NegocioFlr.Negocio
             return _objDatosUsuario.regresa_Usuarios(ref _Estatus);
         }
 
-        public Boolean registra_Usuario(Usuarios _usuarios, ref string _Estatus)
+        public Boolean registra_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
         {                         
-            return _objDatosUsuario.registra_Usuario(_usuarios, ref _Estatus);
+            return _objDatosUsuario.registra_Usuario(_usuarios, ref _Codigo, ref _Mensaje);
         }
 
         public int regresa_Sesion(Usuarios _usuarios, ref string _Estatus)
