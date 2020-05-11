@@ -15,7 +15,8 @@ namespace NegocioFlr.WebIU
         private Usuarios _objUsuarios = new Usuarios();
         private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
         private List<Usuarios> _lstUsuarios;
-        private String _Estatus; 
+        private Int32 _Codigo;
+        private String _Mensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,50 +45,57 @@ namespace NegocioFlr.WebIU
             }
 
             _objUsuarios.Cve_Usr = this.txt_Usuario.Value;
-            _objUsuarios.Pas_Usr = this.txt_Password.Value;
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuario(_objUsuarios, ref _Estatus);
-            if (_lstUsuarios.Count == 0 && _Estatus == null)
+            _objUsuarios.Pas_Usr = _objUsuarios.encripta_Password(this.txt_Password.Value);
+            _objUsuarios.Ali_Cli = this.txt_Alias.Value;
+            if (! _objNegocioUsuario.existe_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje)) 
             {
-                muestra_Mensaje("!! Usuario no registrado ... ¡¡");
-                return;
-            }
-            else if (_Estatus != null)
-            {
-                muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
+                muestra_Mensaje(_Mensaje);
                 return;
             }
 
-            foreach (Usuarios _usuario in _lstUsuarios)
-            {
-                _objUsuarios.Ide_Usr = _lstUsuarios[0].Ide_Usr;
-                _objUsuarios.Ape_Pat = _lstUsuarios[0].Ape_Pat;
-                _objUsuarios.Ape_Mat = _lstUsuarios[0].Ape_Mat;
-                _objUsuarios.Nom_bre = _lstUsuarios[0].Nom_bre;
-                _objUsuarios.Fec_Vig = _lstUsuarios[0].Fec_Vig;
-                _objUsuarios.Cor_reo = _lstUsuarios[0].Cor_reo;
-            }
+            //_lstUsuarios = _objNegocioUsuario.regresa_Usuario(_objUsuarios, ref _Estatus);
+            //if (_lstUsuarios.Count == 0 && _Estatus == null)
+            //{
+            //    muestra_Mensaje("!! Usuario no registrado ... ¡¡");
+            //    return;
+            //}
+            //else if (_Estatus != null)
+            //{
+            //    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
+            //    return;
+            //}
 
-            _Sesion = _objNegocioUsuario.regresa_Sesion(_objUsuarios, ref _Estatus);
-            if (_Sesion == 0 && _Estatus == null)
-            {
-                _Resultado = _objNegocioUsuario.registra_Sesion(_objUsuarios, ref _Estatus);
-                if (_Resultado && _Estatus == null)
-                {
-                    Session["USR_INF"] = _objUsuarios;
-                }
-                else if (_Estatus != null)
-                {
-                    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-                    return;
-                }
-            }
-            else
-            {
-                muestra_Mensaje("!! El usuario " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + " ya ha iniciado una sesion antes ... ¡¡");
-                return;
-            }
+            //foreach (Usuarios _usuario in _lstUsuarios)
+            //{
+            //    _objUsuarios.Ide_Usr = _lstUsuarios[0].Ide_Usr;
+            //    _objUsuarios.Ape_Pat = _lstUsuarios[0].Ape_Pat;
+            //    _objUsuarios.Ape_Mat = _lstUsuarios[0].Ape_Mat;
+            //    _objUsuarios.Nom_bre = _lstUsuarios[0].Nom_bre;
+            //    _objUsuarios.Fec_Vig = _lstUsuarios[0].Fec_Vig;
+            //    _objUsuarios.Cor_reo = _lstUsuarios[0].Cor_reo;
+            //}
 
-            Response.Redirect("~/Paginas/Principal.aspx");
+            //_Sesion = _objNegocioUsuario.regresa_Sesion(_objUsuarios, ref _Estatus);
+            //if (_Sesion == 0 && _Estatus == null)
+            //{
+            //    _Resultado = _objNegocioUsuario.registra_Sesion(_objUsuarios, ref _Estatus);
+            //    if (_Resultado && _Estatus == null)
+            //    {
+            //        Session["USR_INF"] = _objUsuarios;
+            //    }
+            //    else if (_Estatus != null)
+            //    {
+            //        muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
+            //        return;
+            //    }
+            //}
+            //else
+            //{
+            //    muestra_Mensaje("!! El usuario " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + " ya ha iniciado una sesion antes ... ¡¡");
+            //    return;
+            //}
+
+            //Response.Redirect("~/Paginas/Principal.aspx");
         }
 
         protected void btn_Registro_Click(object sender, EventArgs e)
@@ -102,15 +110,20 @@ namespace NegocioFlr.WebIU
         protected Boolean valida_Datos()
         {
             bool _Resultado = true;
-            
+
             if (this.txt_Usuario.Value == string.Empty)
             {
                 muestra_Mensaje("!! Proporcione el usuario ... ¡¡");
-                _Resultado = false; 
+                _Resultado = false;
             }
             else if (this.txt_Password.Value == string.Empty)
             {
-                muestra_Mensaje("!! Proporcione la contraseña ... ¡¡"); 
+                muestra_Mensaje("!! Proporcione la contraseña ... ¡¡");
+                _Resultado = false;
+            }
+            else if (this.txt_Alias.Value == string.Empty)
+            {
+                muestra_Mensaje("!! Proporcione el alias del cliente ... ¡¡");
                 _Resultado = false;
             }
 

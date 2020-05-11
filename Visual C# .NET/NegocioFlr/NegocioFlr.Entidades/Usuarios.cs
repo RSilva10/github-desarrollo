@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace NegocioFlr.Entidades
 {
-    public class Usuarios
+    public class Usuarios : Clientes
     {
         #region Variables
         public enum Operacion : byte { Consulta = 0, Alta, Modificacion };
@@ -189,7 +187,7 @@ namespace NegocioFlr.Entidades
         /// Encripta la contraseña del usuario 
         /// </summary>
         /// <returns></returns>
-        private String encripta_Password(string _pasword)
+        public String encripta_Password(string _pasword)
         {
             string _Resultado = string.Empty;
 
@@ -203,7 +201,7 @@ namespace NegocioFlr.Entidades
         /// Desencripta la contraseña del usuario 
         /// </summary>
         /// <returns></returns>
-        private String desencripta_Password(string _pasword)
+        public String desencripta_Password(string _pasword)
         {
             string _Resultado = string.Empty;
 

@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,6 +67,7 @@
     <Content Include="Imagenes\Flecha_Abajo.ico" />
     <Content Include="Imagenes\Flecha_Arriba.ico" />
     <Content Include="Imagenes\Logo_Empresa.ico" />
+    <Content Include="Imagenes\Logo_NF.png" />
     <Content Include="Imagenes\Logo_Personal.ico" />
     <Content Include="Login.aspx" />
     <Content Include="Paginas\Cat_Usuarios.aspx" />
@@ -148,7 +150,9 @@
       <Name>NegocioFlr.Negocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modulos\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -12,3 +12,17 @@ D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.W
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csprojAssemblyReference.cache
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csproj.CoreCompileInputs.cache
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csproj.CopyComplete
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.WebIU.dll.config
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.WebIU.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.WebIU.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Entidades.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Negocio.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Datos.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Entidades.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Negocio.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\bin\NegocioFlr.Datos.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csprojAssemblyReference.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csproj.CoreCompileInputs.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.csproj.CopyComplete
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.WebIU\obj\Debug\NegocioFlr.WebIU.pdb

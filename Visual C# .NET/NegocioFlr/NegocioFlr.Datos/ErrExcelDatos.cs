@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using NegocioFlr.Entidades;
+using System.Configuration;
 
 namespace NegocioFlr.Datos
 {
@@ -24,7 +25,9 @@ namespace NegocioFlr.Datos
         /// <returns>Listado de errores</returns>
         public List<ErrExcel> regresa_Errores(ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             List<ErrExcel> lstErrexcel = new List<ErrExcel>();
             _Estatus = null;
 
@@ -73,7 +76,9 @@ namespace NegocioFlr.Datos
         /// <returns>Verdadero o Falso</returns>
         public Boolean registra_Error(ErrExcel _errexcel, ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Estatus = null;
             bool _Resultado;
 
@@ -136,7 +141,9 @@ namespace NegocioFlr.Datos
         /// <returns>Verdadero o Falso</returns>
         public Boolean elimina_Error(ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Estatus = null;
             bool _Resultado;
 

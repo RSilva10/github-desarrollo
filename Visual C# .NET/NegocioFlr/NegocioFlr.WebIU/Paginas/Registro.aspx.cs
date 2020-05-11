@@ -42,6 +42,7 @@ namespace NegocioFlr.WebIU.Paginas
             _objUsuarios.Fec_Ing = Convert.ToDateTime("01/01/1900");
             _objUsuarios.Fec_Vig = Convert.ToDateTime("01/01/1900");
             _objUsuarios.Cor_reo = this.txt_Correo.Value;
+            _objUsuarios.Ali_Cli = this.txt_Alias.Value;
 
             _Resultado = _objNegocioUsuario.registra_Usuario(_objUsuarios, ref _Estatus);             
             if (_Estatus != null)
@@ -91,6 +92,11 @@ namespace NegocioFlr.WebIU.Paginas
             else if (! _Correo_valido.IsMatch(this.txt_Correo.Value))
             {
                 muestra_Mensaje("!! Proporcione dirección correo electrónico valida ... ¡¡"); 
+                _Resultado = false;
+            }
+            else if (this.txt_Alias.Value == string.Empty)
+            {
+                muestra_Mensaje("!! Proporcione clave de cliente ... ¡¡");
                 _Resultado = false;
             }
 

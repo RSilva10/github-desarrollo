@@ -9,3 +9,14 @@ D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csprojAssemblyReference.cache
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csproj.CoreCompileInputs.cache
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csproj.CopyComplete
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Negocio.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Negocio.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Datos.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Entidades.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Datos.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\bin\Debug\NegocioFlr.Entidades.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csprojAssemblyReference.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csproj.CoreCompileInputs.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.csproj.CopyComplete
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Negocio\obj\Debug\NegocioFlr.Negocio.pdb

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.SqlClient;
 using NegocioFlr.Entidades;
 using System.Data.OleDb;
+using System.Configuration;
 
 namespace NegocioFlr.Datos
 {
@@ -25,7 +24,9 @@ namespace NegocioFlr.Datos
         /// <returns>Listado de usuario</returns>
         public List<Usuarios> regresa_Usuario(Usuarios _usuarios, ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             List<Usuarios> lstUsuarios = new List<Usuarios>();
             _Estatus = null;
 
@@ -45,7 +46,13 @@ namespace NegocioFlr.Datos
                 _Parametro2.DbType = System.Data.DbType.String;
                 _Parametro2.Direction = System.Data.ParameterDirection.Input;
                 _Parametro2.ParameterName = "@Pas_Usr";
-                _Parametro2.Value = _usuarios.encripta_Pwd; 
+                _Parametro2.Value = _usuarios.encripta_Pwd;
+                //  Alias del cliente
+                SqlParameter _Parametro3 = new SqlParameter();
+                _Parametro3.DbType = System.Data.DbType.String;
+                _Parametro3.Direction = System.Data.ParameterDirection.Input;
+                _Parametro3.ParameterName = "@Ali_Usr";
+                _Parametro3.Value = _usuarios.Ali_Cli;
 
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -53,6 +60,7 @@ namespace NegocioFlr.Datos
                 _Comando.Connection = _Conexion;
                 _Comando.Parameters.Add(_Parametro1);
                 _Comando.Parameters.Add(_Parametro2);
+                _Comando.Parameters.Add(_Parametro3);
                 _Resultado = _Comando.ExecuteReader();
 
                 while (_Resultado.Read())
@@ -81,7 +89,7 @@ namespace NegocioFlr.Datos
                 {
                     _Comando.Dispose();
                     _Conexion.Close();
-                }
+                }                
             }
 
             return lstUsuarios;
@@ -94,7 +102,9 @@ namespace NegocioFlr.Datos
         /// <returns>Listado de usuario</returns>
         public List<Usuarios> regresa_Usuarios(ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             List<Usuarios> lstUsuarios = new List<Usuarios>();
             _Estatus = null;
 
@@ -142,12 +152,16 @@ namespace NegocioFlr.Datos
         /// Alta del usuario en el sistema
         /// </summary>
         /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado de la alta</param>
+        /// <param name="_Codigo">Código de error</param>
+        /// <param name="_Mensaje">Mensaje de error</param>
         /// <returns>Verdadero o Falso</returns>
-        public Boolean registra_Usuario(Usuarios _usuarios, ref string _Estatus)
+        public Boolean registra_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
-            _Estatus = null;
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
+            _Codigo = 0;
+            _Mensaje = null;
             bool _Resultado; 
 
             try
@@ -245,7 +259,9 @@ namespace NegocioFlr.Datos
         /// <returns>Cantidad de sesiones del usuario</returns>
         public int regresa_Sesion(Usuarios _usuarios, ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Estatus = null;
             int _Sesiones = 0;
 
@@ -293,7 +309,9 @@ namespace NegocioFlr.Datos
         /// <returns>Verdadero o Falso</returns>
         public Boolean registra_Sesion(Usuarios _usuarios, ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Estatus = null;
             bool _Resultado;
 
@@ -343,7 +361,9 @@ namespace NegocioFlr.Datos
         /// <returns>Verdadero o Falso</returns>
         public Boolean elimina_Sesion(Usuarios _usuarios, ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Estatus = null;
             bool _Resultado;
 
@@ -393,7 +413,9 @@ namespace NegocioFlr.Datos
         /// <returns>Verdadero o Falso</returns>
         public Boolean existe_Sesion(Usuarios _usuarios, ref string _Estatus)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Estatus = null;
             bool _Resultado;
 
@@ -447,12 +469,16 @@ namespace NegocioFlr.Datos
         /// Revisa si el usuario existe en el sistema
         /// </summary>
         /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado del usuario</param>
+        /// <param name="_Codigo">Código de error</param>
+        /// <param name="_Mensaje">Mensaje de error</param>
         /// <returns>Verdadero o Falso</returns>
-        public Boolean existe_Usuario(Usuarios _usuarios, ref string _Estatus)
+        public Boolean existe_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
         {
-            _Conexion.ConnectionString = "Server=PC01SVR01; Database=NegocioFlr; User Id=sa; Password=F1l0apoL";
-            _Estatus = null;
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
+            _Codigo = 0;
+            _Mensaje = null;
             bool _Resultado;
 
             try
@@ -466,19 +492,58 @@ namespace NegocioFlr.Datos
                 _Parametro1.Direction = System.Data.ParameterDirection.Input;
                 _Parametro1.ParameterName = "@Cve_Usr";
                 _Parametro1.Value = _usuarios.Cve_Usr;
+                //  Contraseña del usuario
+                SqlParameter _Parametro2 = new SqlParameter();
+                _Parametro2.DbType = System.Data.DbType.String;
+                _Parametro2.Direction = System.Data.ParameterDirection.Input;
+                _Parametro2.ParameterName = "@Pas_Usr";
+                _Parametro2.Value = _usuarios.Pas_Usr;
+                //  Alias del cliente
+                SqlParameter _Parametro3 = new SqlParameter();
+                _Parametro3.DbType = System.Data.DbType.String;
+                _Parametro3.Direction = System.Data.ParameterDirection.Input;
+                _Parametro3.ParameterName = "@Ali_Cli";
+                _Parametro3.Value = _usuarios.Ali_Cli;
+                //  Código de error
+                SqlParameter _Parametro4 = new SqlParameter();
+                _Parametro4.DbType = System.Data.DbType.Int32;
+                _Parametro4.Direction = System.Data.ParameterDirection.Output;
+                _Parametro4.Size = 4;
+                _Parametro4.ParameterName = "@Cod_Err";
+                //  Descripción de error
+                SqlParameter _Parametro5 = new SqlParameter();
+                _Parametro5.DbType = System.Data.DbType.String;
+                _Parametro5.Direction = System.Data.ParameterDirection.Output;
+                _Parametro5.Size = 100;
+                _Parametro5.ParameterName = "@Des_Err";
 
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
                 _Comando.CommandText = "sp_Existe_Usuario";
                 _Comando.Connection = _Conexion;
                 _Comando.Parameters.Add(_Parametro1);
+                _Comando.Parameters.Add(_Parametro2);
+                _Comando.Parameters.Add(_Parametro3);
+                _Comando.Parameters.Add(_Parametro4);
+                _Comando.Parameters.Add(_Parametro5);
+
                 _Comando.ExecuteNonQuery();
 
-                _Resultado = true;
+                _Codigo = Convert.ToInt32(_Comando.Parameters["@Cod_Err"].Value);
+                _Mensaje = _Comando.Parameters["@Des_Err"].Value.ToString();
+
+                if (_Codigo == 0) 
+                {
+                    _Resultado = true;
+                }
+                else 
+                {
+                    _Resultado = false;
+                }
             }
             catch (SqlException Error)
             {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
+                _Mensaje = Error.ErrorCode.ToString() + ": " + Error.Message;
                 _Resultado = false;
             }
             finally

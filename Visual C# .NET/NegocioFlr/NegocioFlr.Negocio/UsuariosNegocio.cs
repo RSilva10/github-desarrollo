@@ -49,9 +49,9 @@ namespace NegocioFlr.Negocio
             return _objDatosUsuario.existe_Sesion(_usuarios, ref _Estatus);
         }
 
-        public Boolean existe_Usuario(Usuarios _usuarios, ref string _Estatus)
+        public Boolean existe_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
         {
-            return _objDatosUsuario.existe_Usuario(_usuarios, ref _Estatus);
+            return _objDatosUsuario.existe_Usuario(_usuarios, ref _Codigo, ref _Mensaje);
         }
         
         public List<Usuarios> listado_Excel(string _ubicarchivo, ref string _Estatus)

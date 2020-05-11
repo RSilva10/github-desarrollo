@@ -7,3 +7,12 @@ D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.D
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csprojAssemblyReference.cache
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csproj.CoreCompileInputs.cache
 D:\Desarrollos\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csproj.CopyComplete
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Datos.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Datos.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Entidades.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\bin\Debug\NegocioFlr.Entidades.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csprojAssemblyReference.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csproj.CoreCompileInputs.cache
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.csproj.CopyComplete
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.dll
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Datos\obj\Debug\NegocioFlr.Datos.pdb
