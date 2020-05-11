@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using NegocioFlr.Entidades;
 using NegocioFlr.Negocio;
+using System.IO;
+using System.Text;
+using System.Net.Mime;
 
 namespace NegocioFlr.WebIU.Paginas
 {
@@ -27,8 +30,10 @@ namespace NegocioFlr.WebIU.Paginas
 
         protected void btn_Registrar_Click(object sender, EventArgs e)
         {
-            bool _Resultado;
-             
+            String _Reporte_Passwd = HttpContext.Current.Server.MapPath("./Reportes/rpt_Contrasenia.txt");
+            FileStream _oSw = null;
+            FileInfo _oDescarga = null;
+
             if (!valida_Datos())
             {
                 return;
@@ -47,14 +52,46 @@ namespace NegocioFlr.WebIU.Paginas
 
             if (!_objNegocioUsuario.registra_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje))
             {
-                muestra_Mensaje("!! " + _Codigo.ToString() + ": " + _Mensaje.Trim() + " ... ¡¡"); 
+                muestra_Mensaje(_Mensaje.Trim()); 
             }
             else
             {
-                //  Aqui se debe generar el archivo de texto ...
+                try 
+                {
+                    _oSw = new FileStream(_Reporte_Passwd, FileMode.CreateNew);
+                    using (StreamWriter _oWr =  new StreamWriter(_oSw, Encoding.UTF8))
+                    {
+                        _oWr.WriteLine("Información Alta de Usuario:");
+                        _oWr.WriteLine("\r");
+                        _oWr.WriteLine("Clave usuario       :   " + _objUsuarios.Cve_Usr.Trim());
+                        _oWr.WriteLine("Contraseña usuario  :   " + _objUsuarios.genera_Pwd);
+                        _oWr.WriteLine("Alias cliente       :   " + _objUsuarios.Ali_Cli.ToUpper());
+                        _oWr.WriteLine("\r");
+                        _oWr.WriteLine("Utilice esta información para acceder al sistema");
+                        _oWr.Close();
+                    }
 
-
-                muestra_Mensaje("!! Su contraseña temporal es: " + _objUsuarios.genera_Pwd + " ... ¡¡");
+                    _oDescarga = new FileInfo(_Reporte_Passwd + "rpt_Contrasenia.txt");
+                    if (_oDescarga.Exists) 
+                    {
+                        Page.Response.Clear();
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + _oDescarga.Name);
+                        Response.AddHeader("Content-Length", _oDescarga.Length.ToString());
+                        Response.ContentType = "application/text/plain";
+                        Response.Write(_Reporte_Passwd);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    muestra_Mensaje("!! No fue posible crear archivo para alta usuario. " + ex.Message + " ... ¡¡");
+                }
+                finally 
+                {
+                    if (_oSw != null) 
+                    {
+                        _oSw.Dispose();
+                    }
+                }
             }
         }
 
