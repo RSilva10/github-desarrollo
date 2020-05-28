@@ -101,7 +101,7 @@ namespace NegocioFlr.WebIU
                     foreach (SesiUsrs _sesiusrs in _lstSesiUsrs)
                     {
                         _objSesiUsrs.Ide_Ses = _lstSesiUsrs[0].Ide_Ses;
-                        _objSesiUsrs.Fec_Ses = _lstSesiUsrs[1].Fec_Ses;
+                        _objSesiUsrs.Fec_Ses = _lstSesiUsrs[0].Fec_Ses;
                     }
 
                     Session["USR_INF"] = _objUsuarios;

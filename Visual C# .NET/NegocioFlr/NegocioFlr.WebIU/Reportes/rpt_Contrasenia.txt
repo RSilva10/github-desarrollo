@@ -1,7 +1,7 @@
 ﻿Información Alta de Usuario:
 
 Clave usuario       :   RSilvav
-Contraseña usuario  :   SiViRo6229
+Contraseña usuario  :   SiViRo3383
 Alias cliente       :   CL001
 
 Utilice esta información para acceder al sistema

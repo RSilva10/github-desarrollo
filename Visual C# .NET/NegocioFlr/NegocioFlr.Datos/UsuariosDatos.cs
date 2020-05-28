@@ -48,7 +48,7 @@ namespace NegocioFlr.Datos
                 _Parametro2.DbType = System.Data.DbType.String;
                 _Parametro2.Direction = System.Data.ParameterDirection.Input;
                 _Parametro2.ParameterName = "@Pas_Usr";
-                _Parametro2.Value = _usuarios.encripta_Pwd;
+                _Parametro2.Value = _usuarios.Pas_Usr;
                 //  Alias del cliente
                 SqlParameter _Parametro3 = new SqlParameter();
                 _Parametro3.DbType = System.Data.DbType.String;

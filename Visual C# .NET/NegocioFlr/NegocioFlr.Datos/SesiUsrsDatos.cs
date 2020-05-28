@@ -47,7 +47,7 @@ namespace NegocioFlr.Datos
 
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
-                _Comando.CommandText = "sp_Consulta_Usuario";
+                _Comando.CommandText = "sp_Consulta_Sesion";
                 _Comando.Connection = _Conexion;
                 _Comando.Parameters.Add(_Parametro1);
                 _Resultado = _Comando.ExecuteReader();
@@ -56,7 +56,7 @@ namespace NegocioFlr.Datos
                 {
                     SesiUsrs sesiusrs = new SesiUsrs();
 
-                    sesiusrs.Ide_Ses = _Resultado.GetString(0);
+                    sesiusrs.Ide_Ses = _Resultado.GetGuid(0).ToString();
                     sesiusrs.Fec_Ses = _Resultado.GetDateTime(1);
 
                     lstSesiUsrs.Add(sesiusrs);
