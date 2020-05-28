@@ -9,3 +9,4 @@ D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Entid
 D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.csproj.CoreCompileInputs.cache
 D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.dll
 D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.pdb
+D:\Repositorios\Git\github-desarrollo\Visual C# .NET\NegocioFlr\NegocioFlr.Entidades\obj\Debug\NegocioFlr.Entidades.csprojAssemblyReference.cache

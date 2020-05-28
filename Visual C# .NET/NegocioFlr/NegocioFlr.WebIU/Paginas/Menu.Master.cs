@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using NegocioFlr.Entidades; 
 using NegocioFlr.Negocio;
 
@@ -13,7 +8,7 @@ namespace NegocioFlr.WebIU.Paginas
     {
         #region Variables
         private Usuarios _objUsuarios = new Usuarios();
-        private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
+        private SesiUsrsNegocio _objNegocioSesiUsr = new SesiUsrsNegocio();
         private String _Estatus;
         #endregion
 
@@ -46,11 +41,11 @@ namespace NegocioFlr.WebIU.Paginas
         {
             bool _Resultado;
 
-            _Resultado = _objNegocioUsuario.elimina_Sesion(_objUsuarios, ref _Estatus);
-            if (_Resultado && _Estatus == null)
-            {
-                Session.Abandon();
-            }
+            //_Resultado = _objNegocioSesiUsr.elimina_Sesion();
+            //if (_Resultado && _Estatus == null)
+            //{
+            //    Session.Abandon();
+            //}
 
             Response.Redirect("~/Login.aspx");
         }

@@ -35,29 +35,29 @@ namespace NegocioFlr.WebIU.Paginas
             {
                 _objUsuarios = (Usuarios)Session["USR_INF"];
 
-                _Resultado = _objNegocioUsuario.existe_Sesion(_objUsuarios, ref _Estatus);
-                if (_Resultado && _Estatus == null)
-                {
-                    if (!IsPostBack)
-                    {
-                        carga_Usuarios();
-                    }
-                }
-                else if (!_Resultado && _Estatus == null)
-                {
-                    _Resultado = _objNegocioUsuario.elimina_Sesion(_objUsuarios, ref _Estatus);
-                    if (_Resultado && _Estatus == null)
-                    {
-                        Session.Abandon();
-                    }
+                //_Resultado = _objNegocioUsuario.existe_Sesion(_objUsuarios, ref _Estatus);
+                //if (_Resultado && _Estatus == null)
+                //{
+                //    if (!IsPostBack)
+                //    {
+                //        carga_Usuarios();
+                //    }
+                //}
+                //else if (!_Resultado && _Estatus == null)
+                //{
+                //    _Resultado = _objNegocioUsuario.elimina_Sesion(_objUsuarios, ref _Estatus);
+                //    if (_Resultado && _Estatus == null)
+                //    {
+                //        Session.Abandon();
+                //    }
 
-                    Response.Redirect("~/Login.aspx?S=I");
-                }
-                else if (_Estatus != null)
-                {
-                    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-                    return;
-                }
+                //    Response.Redirect("~/Login.aspx?S=I");
+                //}
+                //else if (_Estatus != null)
+                //{
+                //    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
+                //    return;
+                //}
             }
         }
 

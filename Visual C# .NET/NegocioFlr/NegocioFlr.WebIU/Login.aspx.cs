@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using NegocioFlr.Entidades;
 using NegocioFlr.Negocio;  
 
@@ -13,32 +9,33 @@ namespace NegocioFlr.WebIU
     {
         #region Variables
         private Usuarios _objUsuarios = new Usuarios();
+        private SesiUsrs _objSesiUsrs = new SesiUsrs();
         private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
+        private SesiUsrsNegocio _objNegocioSesiUsr = new SesiUsrsNegocio();
+        private Utilerias _objUtilerias = new Utilerias();
         private List<Usuarios> _lstUsuarios;
+        private List<SesiUsrs> _lstSesiUsrs;
         private Int32 _Codigo;
         private String _Mensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string _SActiva = string.Empty;
+            //string _SActiva = string.Empty;
 
-            if (! IsPostBack)
-            {
-                _SActiva = Request.QueryString["S"];
-                if (_SActiva != null)
-                {
-                    muestra_Mensaje("!! Su sesión ha caducado. Vuelva a ingresar al sistema ... ¡¡");
-                    return;
-                }
-            }
+            //if (! IsPostBack)
+            //{
+            //    _SActiva = Request.QueryString["S"];
+            //    if (_SActiva != null)
+            //    {
+            //        _objUtilerias.muestra_Mensaje(this, "!! Su sesión ha caducado. Vuelva a ingresar al sistema ... ¡¡", 0);
+            //        return;
+            //    }
+            //}
         }
 
         protected void btn_Login_Click(object sender, EventArgs e)
         {
-            int _Sesion;
-            bool _Resultado;
-
             if (!valida_Datos())
             {
                 return;
@@ -49,53 +46,70 @@ namespace NegocioFlr.WebIU
             _objUsuarios.Ali_Cli = this.txt_Alias.Value;
             if (! _objNegocioUsuario.existe_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje)) 
             {
-                muestra_Mensaje(_Mensaje);
+                _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
                 return;
             }
 
-            //_lstUsuarios = _objNegocioUsuario.regresa_Usuario(_objUsuarios, ref _Estatus);
-            //if (_lstUsuarios.Count == 0 && _Estatus == null)
-            //{
-            //    muestra_Mensaje("!! Usuario no registrado ... ¡¡");
-            //    return;
-            //}
-            //else if (_Estatus != null)
-            //{
-            //    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-            //    return;
-            //}
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje);
+            if (_Codigo > 0)
+            {
+                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + ": " + _Mensaje.Trim() + " ... ¡¡", 3);
+                return;
+            }
 
-            //foreach (Usuarios _usuario in _lstUsuarios)
-            //{
-            //    _objUsuarios.Ide_Usr = _lstUsuarios[0].Ide_Usr;
-            //    _objUsuarios.Ape_Pat = _lstUsuarios[0].Ape_Pat;
-            //    _objUsuarios.Ape_Mat = _lstUsuarios[0].Ape_Mat;
-            //    _objUsuarios.Nom_bre = _lstUsuarios[0].Nom_bre;
-            //    _objUsuarios.Fec_Vig = _lstUsuarios[0].Fec_Vig;
-            //    _objUsuarios.Cor_reo = _lstUsuarios[0].Cor_reo;
-            //}
+            foreach (Usuarios _usuario in _lstUsuarios)
+            {
+                _objUsuarios.Ide_Usr = _lstUsuarios[0].Ide_Usr;
+                _objUsuarios.Ape_Pat = _lstUsuarios[0].Ape_Pat;
+                _objUsuarios.Ape_Mat = _lstUsuarios[0].Ape_Mat;
+                _objUsuarios.Nom_bre = _lstUsuarios[0].Nom_bre;
+                _objUsuarios.Fec_Vig = _lstUsuarios[0].Fec_Vig;
+                _objUsuarios.Cor_reo = _lstUsuarios[0].Cor_reo;
+                _objUsuarios.Rso_Cli = _lstUsuarios[0].Rso_Cli;
+                _objUsuarios.Cal_Cli = _lstUsuarios[0].Cal_Cli;
+                _objUsuarios.NEx_Cli = _lstUsuarios[0].NEx_Cli;
+                _objUsuarios.NIn_Cli = _lstUsuarios[0].NIn_Cli;
+                _objUsuarios.Col_Cli = _lstUsuarios[0].Col_Cli;
+                _objUsuarios.Cop_Cli = _lstUsuarios[0].Cop_Cli;
+                _objUsuarios.Del_Cli = _lstUsuarios[0].Del_Cli;
+                _objUsuarios.Ciu_Cli = _lstUsuarios[0].Ciu_Cli;
+                _objUsuarios.Ali_Cli = _lstUsuarios[0].Ali_Cli;
+            }
+            _objSesiUsrs.Ide_Usr = _objUsuarios.Ide_Usr;
 
-            //_Sesion = _objNegocioUsuario.regresa_Sesion(_objUsuarios, ref _Estatus);
-            //if (_Sesion == 0 && _Estatus == null)
-            //{
-            //    _Resultado = _objNegocioUsuario.registra_Sesion(_objUsuarios, ref _Estatus);
-            //    if (_Resultado && _Estatus == null)
-            //    {
-            //        Session["USR_INF"] = _objUsuarios;
-            //    }
-            //    else if (_Estatus != null)
-            //    {
-            //        muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-            //        return;
-            //    }
-            //}
-            //else
-            //{
-            //    muestra_Mensaje("!! El usuario " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + " ya ha iniciado una sesion antes ... ¡¡");
-            //    return;
-            //}
+            if (! _objNegocioSesiUsr.existe_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje))
+            {
+                _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
+                return;
+            }
+            else 
+            { 
+                if (!_objNegocioSesiUsr.registra_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje)) 
+                {
+                    _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
+                    return;
+                }
+                else 
+                {
+                    _lstSesiUsrs = _objNegocioSesiUsr.regresa_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje);
+                    if (_Codigo > 0)
+                    {
+                        _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + ": " + _Mensaje.Trim() + " ... ¡¡", 3);
+                        return;
+                    }
 
-            //Response.Redirect("~/Paginas/Principal.aspx");
+                    foreach (SesiUsrs _sesiusrs in _lstSesiUsrs)
+                    {
+                        _objSesiUsrs.Ide_Ses = _lstSesiUsrs[0].Ide_Ses;
+                        _objSesiUsrs.Fec_Ses = _lstSesiUsrs[1].Fec_Ses;
+                    }
+
+                    Session["USR_INF"] = _objUsuarios;
+                    Session["USR_SES"] = _objSesiUsrs;
+
+                    Response.Redirect("~/Paginas/Principal.aspx");
+                }
+            }
         }
 
         protected void btn_Registro_Click(object sender, EventArgs e)
@@ -113,32 +127,21 @@ namespace NegocioFlr.WebIU
 
             if (this.txt_Usuario.Value == string.Empty)
             {
-                muestra_Mensaje("!! Proporcione el usuario ... ¡¡");
+                _objUtilerias.muestra_Mensaje(this, "!! Proporcione el usuario ... ¡¡", 0);
                 _Resultado = false;
             }
             else if (this.txt_Password.Value == string.Empty)
             {
-                muestra_Mensaje("!! Proporcione la contraseña ... ¡¡");
+                _objUtilerias.muestra_Mensaje(this, "!! Proporcione la contraseña ... ¡¡", 0);
                 _Resultado = false;
             }
             else if (this.txt_Alias.Value == string.Empty)
             {
-                muestra_Mensaje("!! Proporcione el alias del cliente ... ¡¡");
+                _objUtilerias.muestra_Mensaje(this, "!! Proporcione el alias del cliente ... ¡¡", 0);
                 _Resultado = false;
             }
 
             return _Resultado;
         }
-
-        /// <summary>
-        /// Muestra un aviso en pantalla
-        /// </summary>
-        /// <param name="_mensaje">Mensaje que se va a mostrar</param>
-        protected void muestra_Mensaje(string _mensaje)
-        {
-            string _script = @"<script type='text/javascript'> alert('" + _mensaje.Trim() + "')" + "</script>";
-
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", _script, false);
-        }  
     }
 }

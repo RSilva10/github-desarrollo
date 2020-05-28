@@ -1,0 +1,9 @@
+Numero		Descripción
+-100	-->	!! Usuario no registrado o Contraseña incorrecta ... ¡¡
+-101	-->	!! Alias del cliente no registrado para el usuario ... ¡¡
+-102	-->	!! Alias del cliente no registrado o con estatus de no activo ... ¡¡
+-103	-->	!! ' + LTRIM(RTRIM(@Cve_Usr)) + ' ya registrado en el sistema ... ¡¡
+-104	-->	!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al registrar el usuario)
+-105	-->	!! El usuario ' + @Nombre + ' ya ingreso al sistema con anterioridad ... ¡¡
+-106	-->	!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al registrar la sesion
+-107	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al eliminar la sesion)

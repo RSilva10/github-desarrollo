@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Estilos\NegocioFlr.css" />
+    <Content Include="Estilos\toastr.css" />
     <Content Include="Imagenes\Actualiza.ico" />
     <Content Include="Imagenes\Alta.ico" />
     <Content Include="Imagenes\Celular.ico" />
@@ -82,9 +83,13 @@
     <Content Include="Scripts\bootstrap-3.3.7-dist\js\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Scripts\jquery-3.2.0.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\Utilerias.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utilerias.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -151,7 +156,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modulos\" />
     <Folder Include="Reportes\" />
   </ItemGroup>
   <PropertyGroup>

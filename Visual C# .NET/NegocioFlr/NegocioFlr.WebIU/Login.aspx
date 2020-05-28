@@ -7,7 +7,11 @@
     <title>Ingreso al sistema</title>
     <script src="Scripts/jquery-3.2.0.js"></script>
     <script src="Scripts/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/toastr.min.js"></script>
+    <script src="Scripts/Utilerias.js"></script>
     <link href="Scripts/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Estilos/toastr.css" rel="stylesheet" />
     <link href="Estilos/NegocioFlr.css" rel="stylesheet" />
 </head>
 <body class="cuerpo_fondo">

@@ -20,15 +20,17 @@ namespace NegocioFlr.Datos
         /// Consulta del usuario registrado
         /// </summary>
         /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado de la consulta</param>
+        /// <param name="_Codigo">Código de error</param>
+        /// <param name="_Mensaje">Mensaje de error</param>
         /// <returns>Listado de usuario</returns>
-        public List<Usuarios> regresa_Usuario(Usuarios _usuarios, ref string _Estatus)
+        public List<Usuarios> consulta_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
         {
             Usuarios _oUsuario = new Usuarios();
 
             _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             List<Usuarios> lstUsuarios = new List<Usuarios>();
-            _Estatus = null;
+            _Codigo = 0;
+            _Mensaje = "OK";
 
             try
             {
@@ -75,13 +77,22 @@ namespace NegocioFlr.Datos
                     usuarios.Fec_Ing = _Resultado.GetDateTime(5);
                     usuarios.Fec_Vig = _Resultado.GetDateTime(6);
                     usuarios.Cor_reo = _Resultado.GetString(7);
+                    usuarios.Rso_Cli = _Resultado.GetString(8);
+                    usuarios.Cal_Cli = _Resultado.GetString(9);
+                    usuarios.NEx_Cli = _Resultado.GetString(10);
+                    usuarios.NIn_Cli = _Resultado.GetString(11);
+                    usuarios.Col_Cli = _Resultado.GetString(12);
+                    usuarios.Cop_Cli = _Resultado.GetString(13);
+                    usuarios.Del_Cli = _Resultado.GetString(14);
+                    usuarios.Ciu_Cli = _Resultado.GetString(15);
 
                     lstUsuarios.Add(usuarios);
                 }
             }
             catch (SqlException Error)
             {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
+                _Codigo = Error.ErrorCode;
+                _Mensaje = Error.Message;
             }
             finally
             {
@@ -100,7 +111,7 @@ namespace NegocioFlr.Datos
         /// </summary>
         /// <param name="_Estatus">Resultado de la consulta</param>
         /// <returns>Listado de usuario</returns>
-        public List<Usuarios> regresa_Usuarios(ref string _Estatus)
+        public List<Usuarios> consulta_Usuarios(ref string _Estatus)
         {
             Usuarios _oUsuario = new Usuarios();
 
@@ -154,18 +165,23 @@ namespace NegocioFlr.Datos
         /// <param name="_usuarios">Clase usuario</param>
         /// <param name="_Codigo">Código de error</param>
         /// <param name="_Mensaje">Mensaje de error</param>
+        /// <param name="_Contrasenia">Contraseña generada para el usuario</param>
         /// <returns>Verdadero o Falso</returns>
-        public Boolean registra_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
+        public Boolean registra_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje, ref string _Contrasenia)
         {
             Usuarios _oUsuario = new Usuarios();
 
             _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Codigo = 0;
             _Mensaje = null;
+            _Contrasenia = null;
             bool _Resultado; 
 
             try
             {
+                _usuarios.Pas_Usr = _usuarios.genera_Pwd;
+                _Contrasenia = _usuarios.Pas_Usr;
+
                 _Conexion.Open();
 
                 //  Parámetros:
@@ -180,7 +196,6 @@ namespace NegocioFlr.Datos
                 _Parametro2.DbType = System.Data.DbType.String;
                 _Parametro2.Direction = System.Data.ParameterDirection.Input;
                 _Parametro2.ParameterName = "@Pas_Usr";
-                _Parametro2.Value = _usuarios.genera_Pwd;
                 _Parametro2.Value = _usuarios.encripta_Pwd;
                 //  Apellido paterno
                 SqlParameter _Parametro3 = new SqlParameter();
@@ -270,220 +285,6 @@ namespace NegocioFlr.Datos
             {
                 _Codigo = Error.ErrorCode;
                 _Mensaje = Error.Message;
-                _Resultado = false;
-            }
-            finally
-            {
-                if (_Comando != null)
-                {
-                    _Comando.Dispose();
-                    _Conexion.Close();
-                }
-            }
-
-            return _Resultado;
-        }
-
-        /// <summary>
-        /// Consulta la sesion del usuario que ingreso al sistema
-        /// </summary>
-        /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado de la consulta</param>
-        /// <returns>Cantidad de sesiones del usuario</returns>
-        public int regresa_Sesion(Usuarios _usuarios, ref string _Estatus)
-        {
-            Usuarios _oUsuario = new Usuarios();
-
-            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
-            _Estatus = null;
-            int _Sesiones = 0;
-
-            try
-            {
-                _Conexion.Open();
-
-                //  Parámetros:
-                //  Identificador del usuario
-                SqlParameter _Parametro1 = new SqlParameter();
-                _Parametro1.DbType = System.Data.DbType.Int32;
-                _Parametro1.Direction = System.Data.ParameterDirection.Input;
-                _Parametro1.ParameterName = "@Ide_Usr";
-                _Parametro1.Value = _usuarios.Ide_Usr;
-
-                _Comando = new SqlCommand();
-                _Comando.CommandType = System.Data.CommandType.StoredProcedure;
-                _Comando.CommandText = "sp_Consulta_Sesion";
-                _Comando.Connection = _Conexion;
-                _Comando.Parameters.Add(_Parametro1);
-                _Sesiones = Convert.ToInt32(_Comando.ExecuteScalar());
-
-            }
-            catch (SqlException Error)
-            {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
-            }
-            finally
-            {
-                if (_Comando != null)
-                {
-                    _Comando.Dispose();
-                    _Conexion.Close();
-                }
-            }
-
-            return _Sesiones;
-        }
-
-        /// <summary>
-        /// Alta de la sesion del usuario en el sistema
-        /// </summary>
-        /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado de la alta</param>
-        /// <returns>Verdadero o Falso</returns>
-        public Boolean registra_Sesion(Usuarios _usuarios, ref string _Estatus)
-        {
-            Usuarios _oUsuario = new Usuarios();
-
-            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
-            _Estatus = null;
-            bool _Resultado;
-
-            try
-            {
-                _Conexion.Open();
-
-                //  Parámetros:
-                //  Identificador del usuario
-                SqlParameter _Parametro1 = new SqlParameter();
-                _Parametro1.DbType = System.Data.DbType.Int32;
-                _Parametro1.Direction = System.Data.ParameterDirection.Input;
-                _Parametro1.ParameterName = "@Ide_Usr";
-                _Parametro1.Value = _usuarios.Ide_Usr;
-
-                _Comando = new SqlCommand();
-                _Comando.CommandType = System.Data.CommandType.StoredProcedure;
-                _Comando.CommandText = "sp_Registra_Sesion";
-                _Comando.Connection = _Conexion;
-                _Comando.Parameters.Add(_Parametro1);
-                _Comando.ExecuteNonQuery();
-
-                _Resultado = true;
-            }
-            catch (SqlException Error)
-            {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
-                _Resultado = false;
-            }
-            finally
-            {
-                if (_Comando != null)
-                {
-                    _Comando.Dispose();
-                    _Conexion.Close();
-                }
-            }
-
-            return _Resultado;
-        }
-
-        /// <summary>
-        /// Elimina la sesion del usuario del sistema
-        /// </summary>
-        /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado del borrado</param>
-        /// <returns>Verdadero o Falso</returns>
-        public Boolean elimina_Sesion(Usuarios _usuarios, ref string _Estatus)
-        {
-            Usuarios _oUsuario = new Usuarios();
-
-            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
-            _Estatus = null;
-            bool _Resultado;
-
-            try
-            {
-                _Conexion.Open();
-
-                //  Parámetros:
-                //  Identificador del usuario
-                SqlParameter _Parametro1 = new SqlParameter();
-                _Parametro1.DbType = System.Data.DbType.Int32;
-                _Parametro1.Direction = System.Data.ParameterDirection.Input;
-                _Parametro1.ParameterName = "@Ide_Usr";
-                _Parametro1.Value = _usuarios.Ide_Usr;
-
-                _Comando = new SqlCommand();
-                _Comando.CommandType = System.Data.CommandType.StoredProcedure;
-                _Comando.CommandText = "sp_Elimina_Sesion";
-                _Comando.Connection = _Conexion;
-                _Comando.Parameters.Add(_Parametro1);
-                _Comando.ExecuteNonQuery();
-
-                _Resultado = true;
-            }
-            catch (SqlException Error)
-            {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
-                _Resultado = false;
-            }
-            finally
-            {
-                if (_Comando != null)
-                {
-                    _Comando.Dispose();
-                    _Conexion.Close();
-                }
-            }
-
-            return _Resultado;
-        }
-
-        /// <summary>
-        /// Revisa si la sesion del usuario esta activa
-        /// </summary>
-        /// <param name="_usuarios">Clase usuario</param>
-        /// <param name="_Estatus">Resultado de la sesion</param>
-        /// <returns>Verdadero o Falso</returns>
-        public Boolean existe_Sesion(Usuarios _usuarios, ref string _Estatus)
-        {
-            Usuarios _oUsuario = new Usuarios();
-
-            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
-            _Estatus = null;
-            bool _Resultado;
-
-            try
-            {
-                _Conexion.Open();
-
-                //  Parámetros:
-                //  Identificador del usuario
-                SqlParameter _Parametro1 = new SqlParameter();
-                _Parametro1.DbType = System.Data.DbType.Int32;
-                _Parametro1.Direction = System.Data.ParameterDirection.Input;
-                _Parametro1.ParameterName = "@Ide_Usr";
-                _Parametro1.Value = _usuarios.Ide_Usr;
-                //  Tiempo de la sesion
-                SqlParameter _Parametro2 = new SqlParameter();
-                _Parametro2.DbType = System.Data.DbType.Int32;
-                _Parametro2.Direction = System.Data.ParameterDirection.Input;
-                _Parametro2.ParameterName = "@Tie_Ses";
-                _Parametro2.Value = 20;
-
-                _Comando = new SqlCommand();
-                _Comando.CommandType = System.Data.CommandType.StoredProcedure;
-                _Comando.CommandText = "sp_Existe_Sesion";
-                _Comando.Connection = _Conexion;
-                _Comando.Parameters.Add(_Parametro1);
-                _Comando.Parameters.Add(_Parametro2);
-                _Comando.ExecuteNonQuery();
-
-                _Resultado = true;
-
-            }
-            catch (SqlException Error)
-            {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
                 _Resultado = false;
             }
             finally
