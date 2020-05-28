@@ -8,8 +8,11 @@ namespace NegocioFlr.WebIU.Paginas
     {
         #region Variables
         private Usuarios _objUsuarios = new Usuarios();
+        private SesiUsrs _objSesiUsrs = new SesiUsrs();
         private SesiUsrsNegocio _objNegocioSesiUsr = new SesiUsrsNegocio();
-        private String _Estatus;
+        private Utilerias _objUtilerias = new Utilerias();
+        private Int32 _Codigo;
+        private String _Mensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -17,13 +20,14 @@ namespace NegocioFlr.WebIU.Paginas
             DateTime _Hoy = DateTime.Today;
             TimeSpan _Vigencia;
                          
-            if (Session["USR_INF"] == null)
+            if (Session["USR_INF"] == null || Session["USR_SES"] == null)
             {
                 Response.Redirect("~/Login.aspx");
             }
             else
             {
                 _objUsuarios = (Usuarios)Session["USR_INF"];
+                _objSesiUsrs = (SesiUsrs)Session["USR_SES"];
 
                 if (!IsPostBack)
                 {
@@ -41,11 +45,15 @@ namespace NegocioFlr.WebIU.Paginas
         {
             bool _Resultado;
 
-            //_Resultado = _objNegocioSesiUsr.elimina_Sesion();
-            //if (_Resultado && _Estatus == null)
-            //{
-            //    Session.Abandon();
-            //}
+            _Resultado = _objNegocioSesiUsr.elimina_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje);
+            if (_Resultado) 
+            {
+                Session.Abandon();
+            }
+            else 
+            {
+                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo.ToString() + " " + _Mensaje.Trim() + " ... ¡¡", 3);
+            }
 
             Response.Redirect("~/Login.aspx");
         }

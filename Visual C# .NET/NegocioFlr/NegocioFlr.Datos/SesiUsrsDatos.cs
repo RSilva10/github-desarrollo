@@ -264,12 +264,26 @@ namespace NegocioFlr.Datos
                 _Parametro1.Direction = System.Data.ParameterDirection.Input;
                 _Parametro1.ParameterName = "@Ide_Usr";
                 _Parametro1.Value = _sesiusrs.Ide_Usr;
+                //  Código de error
+                SqlParameter _Parametro2 = new SqlParameter();
+                _Parametro2.DbType = System.Data.DbType.Int32;
+                _Parametro2.Direction = System.Data.ParameterDirection.Output;
+                _Parametro2.Size = 4;
+                _Parametro2.ParameterName = "@Cod_Err";
+                //  Descripción de error
+                SqlParameter _Parametro3 = new SqlParameter();
+                _Parametro3.DbType = System.Data.DbType.String;
+                _Parametro3.Direction = System.Data.ParameterDirection.Output;
+                _Parametro3.Size = 100;
+                _Parametro3.ParameterName = "@Des_Err";
 
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
                 _Comando.CommandText = "sp_Elimina_Sesion";
                 _Comando.Connection = _Conexion;
                 _Comando.Parameters.Add(_Parametro1);
+                _Comando.Parameters.Add(_Parametro2);
+                _Comando.Parameters.Add(_Parametro3);
                 _Comando.ExecuteNonQuery();
 
                 _Resultado = true;
