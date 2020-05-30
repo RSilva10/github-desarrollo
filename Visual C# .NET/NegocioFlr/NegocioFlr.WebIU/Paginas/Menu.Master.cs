@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using NegocioFlr.Entidades; 
 using NegocioFlr.Negocio;
 
@@ -17,6 +18,7 @@ namespace NegocioFlr.WebIU.Paginas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string _sCadena = string.Empty;
             DateTime _Hoy = DateTime.Today;
             TimeSpan _Vigencia;
                          
@@ -31,12 +33,23 @@ namespace NegocioFlr.WebIU.Paginas
 
                 if (!IsPostBack)
                 {
+                    _sCadena = _objUsuarios.Rso_Cli.Trim() + "<br></br>";
+                    _sCadena += _objUsuarios.Cal_Cli.Trim() + "<br>";
+                    _sCadena += _objUsuarios.Col_Cli.Trim() + "<br>";
+                    _sCadena += "Ext: " + _objUsuarios.NEx_Cli.Trim() + ", Int: " + _objUsuarios.NIn_Cli.Trim() + "<br>";
+                    _sCadena += _objUsuarios.Del_Cli.Trim() + ", " + _objUsuarios.Ciu_Cli.Trim() + "<br>";
+                    this.lbl_Empresa.InnerHtml = _sCadena.Trim();
+
+                    _sCadena = "Bienvenido " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + ":";
+                    this.lbl_Bienvenido.InnerHtml = _sCadena;                   
+
                     _Vigencia = _objUsuarios.Fec_Vig - _Hoy;
 
-                    this.lbl_Copyrigth.Text = "Desarrollo de Aplicaciones a la Medida &copy; Copyrigth " + DateTime.Now.Year.ToString() + " todos los derechos reservados.";
-                    this.lbl_Informativo.Text = "Fecha vigencia acceso: " + _objUsuarios.Fec_Vig.Date.ToString().Substring(0, 10);
-                    this.lbl_Vigencia.Text = "Días vigencia acceso: " + _Vigencia.ToString().Substring(0, 2);
+                    _sCadena = "( Fecha vigencia acceso: " + _objUsuarios.Fec_Vig.Date.ToString().Substring(0, 10) + ", Días vigencia acceso: " + _Vigencia.ToString().Substring(0, 2) + " )";
+                    this.lbl_Informativo.InnerHtml = _sCadena;
 
+
+                    this.lbl_CP.InnerHtml = "Desarrollo de Aplicaciones a la Medida &copy; Copyrigth " + DateTime.Now.Year.ToString() + " todos los derechos reservados.";
                 }
             }
         }

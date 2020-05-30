@@ -70,19 +70,21 @@
     <Content Include="Imagenes\Logo_Empresa.ico" />
     <Content Include="Imagenes\Logo_NF.png" />
     <Content Include="Imagenes\Logo_Personal.ico" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Login.aspx" />
     <Content Include="Paginas\Cat_Usuarios.aspx" />
     <Content Include="Paginas\Principal.aspx" />
     <Content Include="Paginas\Registro.aspx" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap.css" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\js\bootstrap.js" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\js\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\js\npm.js" />
-    <Content Include="Scripts\jquery-3.2.0.js" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-grid.css" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-grid.min.css" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-reboot.css" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\Utilerias.js" />
@@ -128,16 +130,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap-theme.css.map" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css.map" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap.css.map" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\css\bootstrap.min.css.map" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Scripts\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Paginas\Menu.Master" />
     <Content Include="Documentos\Template_Usuarios.xlsx" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-grid.css.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\css\bootstrap.min.css.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap-4.5.0-dist\js\bootstrap.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

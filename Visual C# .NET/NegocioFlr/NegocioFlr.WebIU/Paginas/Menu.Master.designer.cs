@@ -33,13 +33,40 @@ namespace NegocioFlr.WebIU.Paginas
         protected global::System.Web.UI.HtmlControls.HtmlForm pag_Menu;
 
         /// <summary>
-        /// Control lbl_Cliente.
+        /// Control img_Logo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Cliente;
+        protected global::System.Web.UI.WebControls.Image img_Logo;
+
+        /// <summary>
+        /// Control lbl_Empresa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_Empresa;
+
+        /// <summary>
+        /// Control lbl_Bienvenido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_Bienvenido;
+
+        /// <summary>
+        /// Control lbl_Informativo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_Informativo;
 
         /// <summary>
         /// Control btn_Logout.
@@ -51,6 +78,15 @@ namespace NegocioFlr.WebIU.Paginas
         protected global::System.Web.UI.WebControls.Button btn_Logout;
 
         /// <summary>
+        /// Control lbl_CP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_CP;
+
+        /// <summary>
         /// Control cph_Cuerpo.
         /// </summary>
         /// <remarks>
@@ -58,32 +94,5 @@ namespace NegocioFlr.WebIU.Paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder cph_Cuerpo;
-
-        /// <summary>
-        /// Control lbl_Vigencia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Vigencia;
-
-        /// <summary>
-        /// Control lbl_Informativo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Informativo;
-
-        /// <summary>
-        /// Control lbl_Copyrigth.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Copyrigth;
     }
 }
