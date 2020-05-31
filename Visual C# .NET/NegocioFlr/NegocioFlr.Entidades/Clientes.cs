@@ -17,6 +17,7 @@ namespace NegocioFlr.Entidades
 		private string _Del_Cli;
 		private string _Ciu_Cli;
 		private string _Ali_Cli;
+        private string _Ico_Cli;
         #endregion
 
         #region Propiedades
@@ -72,6 +73,12 @@ namespace NegocioFlr.Entidades
         {
             get { return _Ali_Cli; }
             set { _Ali_Cli = value; }
+        }
+
+        public String Ico_Cli 
+        {
+            get { return _Ico_Cli; }
+            set { _Ico_Cli = value; }
         }
         #endregion
     }

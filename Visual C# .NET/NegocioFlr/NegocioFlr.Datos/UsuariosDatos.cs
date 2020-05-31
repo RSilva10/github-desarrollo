@@ -85,6 +85,7 @@ namespace NegocioFlr.Datos
                     usuarios.Cop_Cli = _Resultado.GetString(13);
                     usuarios.Del_Cli = _Resultado.GetString(14);
                     usuarios.Ciu_Cli = _Resultado.GetString(15);
+                    usuarios.Ico_Cli = _Resultado.GetString(16);
 
                     lstUsuarios.Add(usuarios);
                 }

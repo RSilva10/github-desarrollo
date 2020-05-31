@@ -74,6 +74,7 @@ namespace NegocioFlr.WebIU
                 _objUsuarios.Del_Cli = _lstUsuarios[0].Del_Cli;
                 _objUsuarios.Ciu_Cli = _lstUsuarios[0].Ciu_Cli;
                 _objUsuarios.Ali_Cli = _lstUsuarios[0].Ali_Cli;
+                _objUsuarios.Ico_Cli = _lstUsuarios[0].Ico_Cli;
             }
             _objSesiUsrs.Ide_Usr = _objUsuarios.Ide_Usr;
 

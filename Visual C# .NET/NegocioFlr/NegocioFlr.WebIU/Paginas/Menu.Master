@@ -23,7 +23,7 @@
                     <table style="height: 100px">
                         <tr style="align-content: center">
                             <td>
-                                <asp:Image ID="img_Logo" runat="server" class="rounded" ImageUrl="~/Imagenes/Logo_Personal.ico" />
+                                <asp:Image ID="img_Logo" runat="server" Width="100" Height="100" class="rounded" ImageUrl="~/Imagenes/Empresas/CL001.png" />
                             </td>
                             <td>
                                 <label id="lbl_Empresa" runat="server" style="color: white; font-style: normal; font-size: 12px"></label>

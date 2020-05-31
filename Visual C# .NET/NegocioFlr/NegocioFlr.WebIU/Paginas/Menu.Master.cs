@@ -33,6 +33,11 @@ namespace NegocioFlr.WebIU.Paginas
 
                 if (!IsPostBack)
                 {
+                    if (_objUsuarios.Ico_Cli.Trim() != "") 
+                    {
+                        this.img_Logo.ImageUrl = "~/Imagenes/Empresas/" + _objUsuarios.Ico_Cli + "";
+                    }
+
                     _sCadena = _objUsuarios.Rso_Cli.Trim() + "<br></br>";
                     _sCadena += _objUsuarios.Cal_Cli.Trim() + "<br>";
                     _sCadena += _objUsuarios.Col_Cli.Trim() + "<br>";

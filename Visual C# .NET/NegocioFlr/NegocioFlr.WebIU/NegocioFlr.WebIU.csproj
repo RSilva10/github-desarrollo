@@ -68,8 +68,7 @@
     <Content Include="Imagenes\Flecha_Abajo.ico" />
     <Content Include="Imagenes\Flecha_Arriba.ico" />
     <Content Include="Imagenes\Logo_Empresa.ico" />
-    <Content Include="Imagenes\Logo_NF.png" />
-    <Content Include="Imagenes\Logo_Personal.ico" />
+    <Content Include="Imagenes\Empresas\CL001.png" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Login.aspx" />
     <Content Include="Paginas\Cat_Usuarios.aspx" />
