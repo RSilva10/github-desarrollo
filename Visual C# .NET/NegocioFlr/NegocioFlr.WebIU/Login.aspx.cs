@@ -21,21 +21,12 @@ namespace NegocioFlr.WebIU
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string _SActiva = string.Empty;
-
-            //if (! IsPostBack)
-            //{
-            //    _SActiva = Request.QueryString["S"];
-            //    if (_SActiva != null)
-            //    {
-            //        _objUtilerias.muestra_Mensaje(this, "!! Su sesión ha caducado. Vuelva a ingresar al sistema ... ¡¡", 0);
-            //        return;
-            //    }
-            //}
         }
 
         protected void btn_Login_Click(object sender, EventArgs e)
         {
+            bool _Resultado;
+
             if (!valida_Datos())
             {
                 return;
@@ -44,6 +35,7 @@ namespace NegocioFlr.WebIU
             _objUsuarios.Cve_Usr = this.txt_Usuario.Value;
             _objUsuarios.Pas_Usr = _objUsuarios.encripta_Password(this.txt_Password.Value);
             _objUsuarios.Ali_Cli = this.txt_Alias.Value;
+
             if (! _objNegocioUsuario.existe_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje)) 
             {
                 _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
@@ -77,6 +69,23 @@ namespace NegocioFlr.WebIU
                 _objUsuarios.Ico_Cli = _lstUsuarios[0].Ico_Cli;
             }
             _objSesiUsrs.Ide_Usr = _objUsuarios.Ide_Usr;
+
+            if (this.chk_SActivas.Checked == true)
+            {
+                _Resultado = _objNegocioSesiUsr.elimina_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje);
+                if (_Resultado)
+                {
+                    _objUtilerias.muestra_Mensaje(this, "!! Se eliminó la sesión activa de " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + " ... ¡¡", 0);
+                    Session.Abandon();
+                }
+                else
+                {
+                    _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo.ToString() + " " + _Mensaje.Trim() + " ... ¡¡", 3);
+                }
+                this.chk_SActivas.Checked = false;
+
+                return;
+            }
 
             if (! _objNegocioSesiUsr.existe_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje))
             {

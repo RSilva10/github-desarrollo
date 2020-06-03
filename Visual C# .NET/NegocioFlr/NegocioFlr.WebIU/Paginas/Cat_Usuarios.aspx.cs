@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using NegocioFlr.Entidades;
 using NegocioFlr.Negocio;
-using System.IO;
 using System.Text.RegularExpressions;
 
 namespace NegocioFlr.WebIU.Paginas
@@ -15,19 +13,16 @@ namespace NegocioFlr.WebIU.Paginas
     {
         #region Variables
         private Usuarios _objUsuarios = new Usuarios();
-        private ErrExcel _objErrexcel = new ErrExcel();
         private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
-        private ErrExcelNegocio _objNegocioErrexcel = new ErrExcelNegocio();
+        private Utilerias _objUtilerias = new Utilerias();
         private List<Usuarios> _lstUsuarios;
-        private List<ErrExcel> _lstErrexcel;
-        private String _Estatus;
+        private Int32 _Codigo;
+        private String _Mensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool _Resultado;
-
-            if (Session["USR_INF"] == null)
+            if (Session["USR_INF"] == null || Session["USR_SES"] == null)
             {
                 Response.Redirect("~/Login.aspx");
             }
@@ -35,29 +30,11 @@ namespace NegocioFlr.WebIU.Paginas
             {
                 _objUsuarios = (Usuarios)Session["USR_INF"];
 
-                //_Resultado = _objNegocioUsuario.existe_Sesion(_objUsuarios, ref _Estatus);
-                //if (_Resultado && _Estatus == null)
-                //{
-                //    if (!IsPostBack)
-                //    {
-                //        carga_Usuarios();
-                //    }
-                //}
-                //else if (!_Resultado && _Estatus == null)
-                //{
-                //    _Resultado = _objNegocioUsuario.elimina_Sesion(_objUsuarios, ref _Estatus);
-                //    if (_Resultado && _Estatus == null)
-                //    {
-                //        Session.Abandon();
-                //    }
-
-                //    Response.Redirect("~/Login.aspx?S=I");
-                //}
-                //else if (_Estatus != null)
-                //{
-                //    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-                //    return;
-                //}
+                if (!IsPostBack) 
+                {
+                    llena_Estatus();
+                    carga_Usuarios();
+                }
             }
         }
 
@@ -77,316 +54,63 @@ namespace NegocioFlr.WebIU.Paginas
         /// </summary>
         protected void carga_Usuarios()
         {
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(ref _Estatus);
-            if (_lstUsuarios.Count > 0 && _Estatus == null)
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", ref _Codigo, ref _Mensaje);
+            if (_Codigo == 0)
             {
-                this.grv_Usuarios.DataSource = _lstUsuarios;
-                this.grv_Usuarios.DataBind();
+                this.grd_Usuarios.DataSource = _lstUsuarios;
+                this.grd_Usuarios.DataBind();
             }
-            else if (_Estatus != null)
+            else 
             {
-                muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
+                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + " " + _Mensaje + " ... ¡¡", 0);
             }
         }
 
         /// <summary>
-        /// Muestra un aviso en pantalla
+        /// Llena el combo de estatus
         /// </summary>
-        /// <param name="_mensaje">Mensaje que se va a mostrar</param>
-        protected void muestra_Mensaje(string _mensaje)
+        protected void llena_Estatus() 
         {
-            string _script = @"<script type='text/javascript'> alert('" + _mensaje.Trim() + "')" + "</script>";
+            ListItem _Item;
 
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", _script, false);
+            _Item = new ListItem("Activos", "1");
+            this.ddl_Estatus.Items.Add(_Item);
+            _Item = new ListItem("Inactivos", "0");
+            this.ddl_Estatus.Items.Add(_Item);
+            _Item = new ListItem("Todos", "2");
+            this.ddl_Estatus.Items.Add(_Item);
         }
 
-        protected void btn_Consultar_Click(object sender, ImageClickEventArgs e)
+        protected void img_Alta_Click(object sender, ImageClickEventArgs e)
         {
-
+            Response.Redirect("./Frm_Usuarios.aspx");
         }
 
-        protected void btn_Descargar_Click(object sender, ImageClickEventArgs e)
+        protected void img_Buscar_Click(object sender, ImageClickEventArgs e)
         {
-            string _Template = "Template_Usuarios.xlsx";
-            string _Archivo;
-
-            try
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, this.txt_Nombre.Value, this.txt_APaterno.Value, this.txt_AMaterno.Value, ref _Codigo, ref _Mensaje);
+            if (_Codigo == 0)
             {
-                _Archivo = Server.MapPath("~/Documentos/" + System.IO.Path.GetFileName(_Template));
-
-                Response.Clear();
-                Response.Buffer = true;
-                Response.ClearHeaders();
-
-                Response.AddHeader("Cache-Control", "no-store, no-cache");
-                Response.ContentType = "application/vnd.ms-excel";
-                Response.AppendHeader("Content-Disposition", "attachment;filename=" + _Template);
-                Response.TransmitFile(_Archivo);
-                Response.Flush();
-                Response.End();
-            }
-            catch (Exception _Error)
-            {
-                muestra_Mensaje("!! Ocurrió un error al descargar el template de usuarios. Detalle: " + _Error.Message.Trim() + " ... ¡¡");
+                this.grd_Usuarios.DataSource = _lstUsuarios;
+                this.grd_Usuarios.DataBind();
             }
         }
 
-        protected void btn_Cargar_Click(object sender, ImageClickEventArgs e)
+        protected void ddl_Estatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int _Elemento;
 
-        }
+            _Elemento = Convert.ToInt32(this.ddl_Estatus.SelectedValue);
 
-        protected void btn_Revisar_Click(object sender, ImageClickEventArgs e)
-        {
-            String _Archivo = string.Empty;
-            String _Extension = string.Empty; 
-            String[] _Extensiones = {".xlsx", ".xls" };
-            bool _Resultado = false;
-            String _Valor = string.Empty; 
-
-            try
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(_Elemento , "", "", "", ref _Codigo, ref _Mensaje);
+            if (_Codigo == 0) 
             {
-                if (this.ful_Revisar.HasFile)
-                {
-                    _Archivo = this.ful_Revisar.PostedFile.FileName;
-                    _Extension = Path.GetExtension(this.ful_Revisar.FileName.ToLower());
-
-                    for (int _i = 0; _i < _Extensiones.Length; _i++)
-                    {
-                        if (_Extension == _Extensiones[_i])
-                        {
-                            _Resultado = true;
-                            break;
-                        }
-                    }
-
-                    if (_Resultado)
-                    {
-                        _lstUsuarios = _objNegocioUsuario.listado_Excel(_Archivo.Trim(), ref _Estatus);
-                        if (_lstUsuarios.Count > 0 && _Estatus == null)
-                        {
-                            _Resultado = _objNegocioErrexcel.elimina_Error(ref _Estatus);
-                            if (_Resultado && _Estatus == null)
-                            {
-                                for (int _i = 0; _i < _lstUsuarios.Count; _i++)
-                                {
-                                    for (int _Campo = 1; _Campo < 7; _Campo++)
-                                    {
-                                        switch (_Campo)
-                                        {
-                                            case 1:
-                                                _Valor = _lstUsuarios[_i].Cve_Usr;
-                                                break;
-                                            case 2:
-                                                _Valor = _lstUsuarios[_i].Pas_Usr;
-                                                break;
-                                            case 3:
-                                                _Valor = _lstUsuarios[_i].Ape_Pat;
-                                                break;
-                                            case 4:
-                                                _Valor = _lstUsuarios[_i].Ape_Mat;
-                                                break;
-                                            case 5:
-                                                _Valor = _lstUsuarios[_i].Nom_bre;
-                                                break;
-                                            default:
-                                                _Valor = _lstUsuarios[_i].Cor_reo;
-                                                break;
-                                        }
-
-                                        _Resultado = valida_Informacion(_i, _Campo, _Valor);
-                                        if (_Estatus != null)
-                                        {
-                                            break;
-                                        }
-                                    }
-
-                                    if (_Estatus != null)
-                                    {
-                                        break;
-                                    }
-                                }
-
-                                if (_Resultado && _Estatus == null)
-                                {
-                                    carga_Errores();
-                                    this.btn_Cargar.Enabled = false;
-                                }                                
-                                else if (_Estatus != null)
-                                {
-                                    muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-                                    this.btn_Cargar.Enabled = false;
-                                }
-                                else
-                                {
-                                    this.btn_Cargar.Enabled = true;
-                                }
-                            }
-                        }
-                        else if (_Estatus != null)
-                        {
-                            muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
-                        }
-                        else
-                        {
-                            muestra_Mensaje("!! El archivo de Excel " + _Archivo.Trim() + " no contiene información para revisión ... ¡¡");
-                        }
-                    }
-                    else
-                    {
-                        muestra_Mensaje("!! El formato del archivo a revisar debe ser Excel {.xlxs o .xls} ... ¡¡");
-                        this.ful_Revisar.Focus();
-                    }
-                }
-                else
-                {
-                    muestra_Mensaje("!! Seleccione un archivo para revisión de información ... ¡¡");
-                    this.ful_Revisar.Focus();
-                }
-            }
-            catch (Exception _Error)
-            {
-                muestra_Mensaje("!! Ocurrió un error al descargar el template de usuarios. Detalle: " + _Error.Message.Trim() + " ... ¡¡");
-            }                 
-        }
-
-        /// <summary>
-        /// Valida y registra los errores del contenido del archivo de Excel
-        /// </summary>
-        /// <param name="_Linea">Número de línea</param>
-        /// <param name="_Campo">Número de campo a validar</param>
-        /// <param name="_Valor">Valor del campo</param>
-        /// <returns>Verdadero si registró el error, Falso si no</returns>
-        private Boolean valida_Informacion(int _Linea, int _Campo, string _Valor)
-        {
-            String[] _Campos = new String[6] { "Clave_Usuario", "Contraseña_Usuario", "Apellido_Paterno", "Apellido_Materno", "Nombre", "Correo_Electrónico"}; 
-            Regex _Correo_valido = new Regex("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$");
-            bool _Eserror = false;
-            bool _Resultado;
-
-            _Estatus = null;
-            _objErrexcel.Num_Lin = _Linea;
-
-            switch (_Campo)
-            {
-                case 1:
-                    //  Clave usuario
-                    _objErrexcel.Nom_Cam = _Campos[0];
-                    if (_Valor.Trim().Length == 0)
-                    {
-                        _objErrexcel.Des_Err = "Su valor viene en blanco";
-                        _Eserror = true;
-                    }
-                    else if (_Valor.Trim().Length > 10)
-                    {
-                        _objErrexcel.Des_Err = "Su valor es mayor a 10 caracteres";
-                        _Eserror = true;
-                    }
-                    break;
-                case 2:
-                    //  Contraseña usuario
-                    _objErrexcel.Nom_Cam = _Campos[1];
-                    if (_Valor.Trim().Length == 0)
-                    {
-                        _objErrexcel.Des_Err = "Su valor viene en blanco";
-                        _Eserror = true;
-                    }
-                    else if (_Valor.Trim().Length > 10)
-                    {
-                        _objErrexcel.Des_Err = "Su valor es mayor a 10 caracteres";
-                        _Eserror = true;
-                    }
-                    break;
-                case 3:
-                    //  Apellido paterno
-                    _objErrexcel.Nom_Cam = _Campos[2];
-                    if (_Valor.Trim().Length == 0)
-                    {
-                        _objErrexcel.Des_Err = "Su valor viene en blanco";
-                        _Eserror = true;
-                    }
-                    else if (_Valor.Trim().Length > 20)
-                    {
-                        _objErrexcel.Des_Err = "Su valor es mayor a 20 caracteres";
-                        _Eserror = true;
-                    }
-                    break;
-                case 4:
-                    //  Apellido materno
-                    _objErrexcel.Nom_Cam = _Campos[3];
-                    if (_Valor.Trim().Length == 0)
-                    {
-                        _objErrexcel.Des_Err = "Su valor viene en blanco";
-                        _Eserror = true;
-                    }
-                    else if (_Valor.Trim().Length > 20)
-                    {
-                        _objErrexcel.Des_Err = "Su valor es mayor a 20 caracteres";
-                        _Eserror = true;
-                    }
-                    break;
-                case 5:
-                    //  Nombre
-                    _objErrexcel.Nom_Cam = _Campos[4];
-                    if (_Valor.Trim().Length == 0)
-                    {
-                        _objErrexcel.Des_Err = "Su valor viene en blanco";
-                        _Eserror = true;
-                    }
-                    else if (_Valor.Trim().Length > 20)
-                    {
-                        _objErrexcel.Des_Err = "Su valor es mayor a 20 caracteres";
-                        _Eserror = true;
-                    }
-                    break;
-                default:
-                    //  Correo electrónico
-                    _objErrexcel.Nom_Cam = _Campos[5];
-                    if (_Valor.Trim().Length == 0)
-                    {
-                        _objErrexcel.Des_Err = "Su valor viene en blanco";
-                        _Eserror = true;
-                    }
-                    else if (_Valor.Trim().Length > 50)
-                    {
-                        _objErrexcel.Des_Err = "Su valor es mayor a 50 caracteres";
-                        _Eserror = true;
-                    }
-                    else if (! _Correo_valido.IsMatch(_Valor.Trim()))
-                    {
-                        _objErrexcel.Des_Err = "Su valor no es valido";
-                        _Eserror = true;
-                    }
-                    break;
-            }
-
-            //  Si existe error lo registramos
-            if (_Eserror)
-            {
-                _Resultado = _objNegocioErrexcel.registra_Error(_objErrexcel, ref _Estatus);
+                this.grd_Usuarios.DataSource = _lstUsuarios;
+                this.grd_Usuarios.DataBind();
             }
             else
             {
-                _Resultado = _Eserror;
-            }
-
-            return _Resultado;
-        }
-
-        /// <summary>
-        /// Muestra los errores registrados
-        /// </summary>
-        protected void carga_Errores()
-        {
-            _lstErrexcel = _objNegocioErrexcel.regresa_Errores(ref _Estatus);
-            if (_lstErrexcel.Count > 0 && _Estatus == null)
-            {
-                this.grv_Errores.DataSource = _lstErrexcel;
-                this.grv_Errores.DataBind();
-            }
-            else if (_Estatus != null)
-            {
-                muestra_Mensaje("!! " + _Estatus.Trim() + " ... ¡¡");
+                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + " " + _Mensaje + " ... ¡¡", 0);
             }
         }
     }

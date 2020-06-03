@@ -19,7 +19,7 @@
         <br />
         <br />
         <br />
-        <center><img src="Imagenes/Logo_NF.png" width="150" class="logo_centrado" style="border:1px solid" /></center>
+        <center><img src="Imagenes/Empresas/CL001.png" width="150" class="logo_centrado" style="border:1px solid" /></center>
         <br />
         <br />
     </div>
@@ -48,6 +48,9 @@
                                     <asp:Button ID="btn_Login" runat="server" CssClass="btn btn-secondary" Text="Ingresar" OnClick="btn_Login_Click" />
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <asp:Button ID="btn_Registro" runat="server" CssClass="btn btn-secondary" Text="Registro" OnClick="btn_Registro_Click" />
+                                </div>
+                                <div class="form-group">
+                                    <asp:CheckBox ID="chk_SActivas" runat="server" style="color:white; font:bold" Text="Eliminar sesiones activas" ToolTip="Elimina una sesion activa de un usuario"></asp:CheckBox>
                                 </div>
                             </form>
                         </center>

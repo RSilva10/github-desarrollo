@@ -110,24 +110,60 @@ namespace NegocioFlr.Datos
         /// <summary>
         /// Consulta todos los usuarios registrados
         /// </summary>
-        /// <param name="_Estatus">Resultado de la consulta</param>
-        /// <returns>Listado de usuario</returns>
-        public List<Usuarios> consulta_Usuarios(ref string _Estatus)
+        /// <param name="_Estatus">Criterio de estatus</param>
+        /// <param name="_Nombre">Criterio de nombre</param>
+        /// <param name="_APaterno">Criterio de apellido paterno</param>
+        /// <param name="_AMaterno">Criterio de apellido materno</param>
+        /// <param name="_Codigo">Código de error</param>
+        /// <param name="_Mensaje">Mensaje de error</param>
+        /// <returns>Listado de usuarios</returns>
+        public List<Usuarios> consulta_Usuarios(int _Estatus, string _Nombre, string _APaterno, string _AMaterno, ref Int32 _Codigo, ref string _Mensaje)
         {
             Usuarios _oUsuario = new Usuarios();
 
             _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             List<Usuarios> lstUsuarios = new List<Usuarios>();
-            _Estatus = null;
+            _Codigo = 0;
+            _Mensaje = "OK";
 
             try
             {
                 _Conexion.Open();
 
+                //  Parámetros:
+                //  Estatus del usuario
+                SqlParameter _Parametro1 = new SqlParameter();
+                _Parametro1.DbType = System.Data.DbType.Int32;
+                _Parametro1.Direction = System.Data.ParameterDirection.Input;
+                _Parametro1.ParameterName = "@Est_Usr";
+                _Parametro1.Value = _Estatus;
+                //  Nombre del usuario
+                SqlParameter _Parametro2 = new SqlParameter();
+                _Parametro2.DbType = System.Data.DbType.String;
+                _Parametro2.Direction = System.Data.ParameterDirection.Input;
+                _Parametro2.ParameterName = "@Nom_bre";
+                _Parametro2.Value = _Nombre;
+                //  Apellido Paterno del usuario
+                SqlParameter _Parametro3 = new SqlParameter();
+                _Parametro3.DbType = System.Data.DbType.String;
+                _Parametro3.Direction = System.Data.ParameterDirection.Input;
+                _Parametro3.ParameterName = "@Ape_Pat";
+                _Parametro3.Value = _APaterno;
+                //  Apellido Materno del usuario
+                SqlParameter _Parametro4 = new SqlParameter();
+                _Parametro4.DbType = System.Data.DbType.String;
+                _Parametro4.Direction = System.Data.ParameterDirection.Input;
+                _Parametro4.ParameterName = "@Ape_Mat";
+                _Parametro4.Value = _AMaterno;
+
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
                 _Comando.CommandText = "sp_Consulta_Usuarios";
                 _Comando.Connection = _Conexion;
+                _Comando.Parameters.Add(_Parametro1);
+                _Comando.Parameters.Add(_Parametro2);
+                _Comando.Parameters.Add(_Parametro3);
+                _Comando.Parameters.Add(_Parametro4);
                 _Resultado = _Comando.ExecuteReader();
 
                 while (_Resultado.Read())
@@ -135,18 +171,19 @@ namespace NegocioFlr.Datos
                     Usuarios usuarios = new Usuarios();
 
                     usuarios.Ide_Usr = _Resultado.GetInt32(0);
-                    usuarios.Cve_Usr = _Resultado.GetString(1);
+                    usuarios.Nom_bre = _Resultado.GetString(1);
                     usuarios.Ape_Pat = _Resultado.GetString(2);
                     usuarios.Ape_Mat = _Resultado.GetString(3);
-                    usuarios.Nom_bre = _Resultado.GetString(4);
-                    usuarios.Cor_reo = _Resultado.GetString(5);
+                    usuarios.Cor_reo = _Resultado.GetString(4);
+                    usuarios.Ide_Usr = _Resultado.GetInt32(5);
 
                     lstUsuarios.Add(usuarios);
                 }
             }
             catch (SqlException Error)
             {
-                _Estatus = Error.ErrorCode.ToString() + ": " + Error.Message;
+                _Codigo = Error.ErrorCode;
+                _Mensaje = Error.Message;
             }
             finally
             {

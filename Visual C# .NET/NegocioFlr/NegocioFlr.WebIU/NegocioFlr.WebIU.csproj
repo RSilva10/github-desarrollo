@@ -56,19 +56,19 @@
   <ItemGroup>
     <Content Include="Estilos\NegocioFlr.css" />
     <Content Include="Estilos\toastr.css" />
-    <Content Include="Imagenes\Actualiza.ico" />
+    <Content Include="Imagenes\Actualiza.jpg" />
     <Content Include="Imagenes\Alta.ico" />
+    <Content Include="Imagenes\Cancelar.png" />
     <Content Include="Imagenes\Celular.ico" />
     <Content Include="Imagenes\Consultar.ico" />
     <Content Include="Imagenes\Contraseña.ico" />
     <Content Include="Imagenes\Correo.ico" />
     <Content Include="Imagenes\Descargar_Excel.ico" />
-    <Content Include="Imagenes\Elimina.ico" />
     <Content Include="Imagenes\Cargar_Excel.ico" />
-    <Content Include="Imagenes\Flecha_Abajo.ico" />
-    <Content Include="Imagenes\Flecha_Arriba.ico" />
-    <Content Include="Imagenes\Logo_Empresa.ico" />
+    <Content Include="Imagenes\Elimina.png" />
     <Content Include="Imagenes\Empresas\CL001.png" />
+    <Content Include="Imagenes\Guardar.jpg" />
+    <Content Include="Paginas\Frm_Usuarios.aspx" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Login.aspx" />
     <Content Include="Paginas\Cat_Usuarios.aspx" />
@@ -90,6 +90,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paginas\Frm_Usuarios.aspx.cs">
+      <DependentUpon>Frm_Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Frm_Usuarios.aspx.designer.cs">
+      <DependentUpon>Frm_Usuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utilerias.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
