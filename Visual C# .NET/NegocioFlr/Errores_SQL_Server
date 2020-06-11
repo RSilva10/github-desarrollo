@@ -7,3 +7,4 @@ Numero		Descripción
 -105	-->	!! El usuario ' + @Nombre + ' ya ingreso al sistema con anterioridad ... ¡¡
 -106	-->	!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al registrar la sesion
 -107	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al eliminar la sesion)
+-108	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al actualizar el usuario)

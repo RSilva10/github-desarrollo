@@ -20,6 +20,7 @@ namespace NegocioFlr.WebIU.Paginas
         {
             string _sCadena = string.Empty;
             DateTime _Hoy = DateTime.Today;
+            DateTime _Limite = _Hoy.AddDays(30);
             TimeSpan _Vigencia;
                          
             if (Session["USR_INF"] == null || Session["USR_SES"] == null)
@@ -46,9 +47,9 @@ namespace NegocioFlr.WebIU.Paginas
                     this.lbl_Empresa.InnerHtml = _sCadena.Trim();
 
                     _sCadena = "Bienvenido " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + ":";
-                    this.lbl_Bienvenido.InnerHtml = _sCadena;                   
+                    this.lbl_Bienvenido.InnerHtml = _sCadena;
 
-                    _Vigencia = _objUsuarios.Fec_Vig - _Hoy;
+                    _Vigencia = _Limite - _objUsuarios.Fec_Vig;
 
                     _sCadena = "( Fecha vigencia acceso: " + _objUsuarios.Fec_Vig.Date.ToString().Substring(0, 10) + ", Días vigencia acceso: " + _Vigencia.ToString().Substring(0, 2) + " )";
                     this.lbl_Informativo.InnerHtml = _sCadena;

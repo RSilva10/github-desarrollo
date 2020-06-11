@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using NegocioFlr.Entidades;
 using NegocioFlr.Negocio;
 using System.Text.RegularExpressions;
+using System.Security.AccessControl;
 
 namespace NegocioFlr.WebIU.Paginas
 {
@@ -16,6 +17,7 @@ namespace NegocioFlr.WebIU.Paginas
         private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
         private Utilerias _objUtilerias = new Utilerias();
         private List<Usuarios> _lstUsuarios;
+        private string _sOpcion = string.Empty;
         private Int32 _Codigo;
         private String _Mensaje;
         #endregion
@@ -32,21 +34,42 @@ namespace NegocioFlr.WebIU.Paginas
 
                 if (!IsPostBack) 
                 {
+                    _sOpcion = Request.QueryString.Get("Opcion");
+                    if (_sOpcion != null) 
+                    { 
+                        if (_sOpcion == "A0") 
+                        {
+                            _objUtilerias.muestra_Mensaje(this, "!! Registro dado de alta ... ¡¡", 0);
+                        }
+                        else 
+                        {
+                            _objUtilerias.muestra_Mensaje(this, "!! Registro actualizado ... ¡¡", 0);
+                        }
+                    }
+
                     llena_Estatus();
                     carga_Usuarios();
                 }
             }
         }
 
-        protected void grv_Usuarios_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void grd_Usuarios_RowCommand(object sender, GridViewCommandEventArgs e)
         {             
-            if (e.CommandName == "Actualizar")
+            if (e.CommandName == "Editar_Registro")
             {
-                Response.Redirect("~/Paginas/Registro.aspx?O=A; K=" + e.CommandArgument.ToString());
+                Response.Redirect("./Frm_Usuarios.aspx?Opcion=E&Key=" + e.CommandArgument.ToString());
             }
             else
             {
             }
+        }
+
+        protected void grd_Usuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grd_Usuarios.PageIndex = e.NewPageIndex;
+            limpia_Grilla();
+
+            carga_Usuarios();
         }
 
         /// <summary>
@@ -54,9 +77,11 @@ namespace NegocioFlr.WebIU.Paginas
         /// </summary>
         protected void carga_Usuarios()
         {
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", ref _Codigo, ref _Mensaje);
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", 0, ref _Codigo, ref _Mensaje);
             if (_Codigo == 0)
             {
+                this.limpia_Grilla();
+
                 this.grd_Usuarios.DataSource = _lstUsuarios;
                 this.grd_Usuarios.DataBind();
             }
@@ -83,14 +108,16 @@ namespace NegocioFlr.WebIU.Paginas
 
         protected void img_Alta_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("./Frm_Usuarios.aspx");
+            Response.Redirect("./Frm_Usuarios.aspx?Opcion=A");
         }
 
         protected void img_Buscar_Click(object sender, ImageClickEventArgs e)
         {
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, this.txt_Nombre.Value, this.txt_APaterno.Value, this.txt_AMaterno.Value, ref _Codigo, ref _Mensaje);
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, this.txt_Nombre.Value, this.txt_APaterno.Value, this.txt_AMaterno.Value, 0, ref _Codigo, ref _Mensaje);
             if (_Codigo == 0)
             {
+                limpia_Grilla();
+
                 this.grd_Usuarios.DataSource = _lstUsuarios;
                 this.grd_Usuarios.DataBind();
             }
@@ -102,7 +129,7 @@ namespace NegocioFlr.WebIU.Paginas
 
             _Elemento = Convert.ToInt32(this.ddl_Estatus.SelectedValue);
 
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(_Elemento , "", "", "", ref _Codigo, ref _Mensaje);
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(_Elemento , "", "", "", 0, ref _Codigo, ref _Mensaje);
             if (_Codigo == 0) 
             {
                 this.grd_Usuarios.DataSource = _lstUsuarios;
@@ -112,6 +139,12 @@ namespace NegocioFlr.WebIU.Paginas
             {
                 _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + " " + _Mensaje + " ... ¡¡", 0);
             }
+        }
+
+        protected void limpia_Grilla() 
+        {
+            this.grd_Usuarios.DataSource = null;
+            this.grd_Usuarios.DataBind();
         }
     }
 }

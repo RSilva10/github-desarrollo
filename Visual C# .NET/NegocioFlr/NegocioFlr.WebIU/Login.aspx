@@ -13,6 +13,30 @@
     <link href="Scripts/bootstrap-4.5.0-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="Estilos/toastr.css" rel="stylesheet" />
     <link href="Estilos/NegocioFlr.css" rel="stylesheet" />
+    <script>
+        //  Valida que no se ingresen caracteres especiales
+        function valida_Caracteres(caracter)
+        {
+            var llave = caracter.keyCode || caracter.which;
+            var tecla = String.fromCharCode(llave).toLowerCase();
+            var letras = "qwertyuiopasdfghjklñzxcvbnmQWERTYUIOASDFGHJKLZXCVBNM1234567890@.-_";
+            var especiales = [8, 9, 46, 13];
+            var tecla_especial = false;
+
+            for (var indice in especiales) {
+                if (llave === especiales[indice]) {
+                    tecla_especial = true;
+                    break;
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial) {
+                    return false;
+                }
+            }
+
+            return tecla_especial;
+        }
+    </script>
 </head>
 <body class="cuerpo_fondo">
     <div>
@@ -36,13 +60,13 @@
                         <center>
                             <form id="pag_Login" runat="server">
                                 <div class="form-group">
-                                    <input id="txt_Usuario" type="text" runat="server" class="form-control" placeholder="Usuario" style="width: 200px" title="Clave de usuario" />
+                                    <input id="txt_Usuario" type="text" runat="server" class="form-control" placeholder="Usuario" style="width: 200px" title="Clave de usuario" onkeypress="javascript:return valida_Caracteres(event);" />
                                 </div>
                                 <div class="form-group">
-                                    <input id="txt_Password" type="password" runat="server" class="form-control" placeholder="Contraseña" style="width: 200px" title="Contraseña de usuario" />
+                                    <input id="txt_Password" type="password" runat="server" class="form-control" placeholder="Contraseña" style="width: 200px" title="Contraseña de usuario" onkeypress="javascript:return valida_Caracteres(event);" />
                                 </div>
                                 <div class="form-group">
-                                    <input id="txt_Alias" type="text" runat="server" class="form-control" placeholder="Alias" style="width: 200px" title="Clave de cliente" />
+                                    <input id="txt_Alias" type="text" runat="server" class="form-control" placeholder="Alias" style="width: 200px" title="Clave de cliente" onkeypress="javascript:return valida_Caracteres(event);" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Button ID="btn_Login" runat="server" CssClass="btn btn-secondary" Text="Ingresar" OnClick="btn_Login_Click" />

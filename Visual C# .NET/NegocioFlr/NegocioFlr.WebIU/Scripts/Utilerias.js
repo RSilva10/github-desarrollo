@@ -1,4 +1,4 @@
-﻿//Muestra un mensaje dependiendo del tipo de mensaje:
+﻿//  Muestra un mensaje dependiendo del tipo de mensaje:
 function muestra_Mensaje(mensaje, tipomensaje)
 {
     toastr.options.closeButton = true;

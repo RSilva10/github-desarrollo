@@ -68,6 +68,7 @@
     <Content Include="Imagenes\Elimina.png" />
     <Content Include="Imagenes\Empresas\CL001.png" />
     <Content Include="Imagenes\Guardar.jpg" />
+    <Content Include="Imagenes\Limpiar.png" />
     <Content Include="Paginas\Frm_Usuarios.aspx" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Login.aspx" />

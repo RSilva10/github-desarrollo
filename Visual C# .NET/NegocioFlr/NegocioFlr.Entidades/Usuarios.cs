@@ -18,6 +18,7 @@ namespace NegocioFlr.Entidades
         private DateTime _Fec_Ing;
         private DateTime _Fec_Vig;
         private string _Cor_reo;
+        private byte _Est_Usr;
         #endregion
 
         #region Propiedades
@@ -109,6 +110,12 @@ namespace NegocioFlr.Entidades
         {
             get { return _Cor_reo; }
             set { _Cor_reo = value; }
+        }
+
+        public byte Est_Usr 
+        {
+            get { return _Est_Usr; }
+            set { _Est_Usr = value; }
         }
 
         public String encripta_Pwd

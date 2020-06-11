@@ -108,16 +108,17 @@ namespace NegocioFlr.Datos
         }
 
         /// <summary>
-        /// Consulta todos los usuarios registrados
+        /// Consulta todos los usuarios registrados 
         /// </summary>
         /// <param name="_Estatus">Criterio de estatus</param>
         /// <param name="_Nombre">Criterio de nombre</param>
         /// <param name="_APaterno">Criterio de apellido paterno</param>
         /// <param name="_AMaterno">Criterio de apellido materno</param>
+        /// <param name="_Llave">Criterio de identificador del usuario</param>
         /// <param name="_Codigo">Código de error</param>
         /// <param name="_Mensaje">Mensaje de error</param>
         /// <returns>Listado de usuarios</returns>
-        public List<Usuarios> consulta_Usuarios(int _Estatus, string _Nombre, string _APaterno, string _AMaterno, ref Int32 _Codigo, ref string _Mensaje)
+        public List<Usuarios> consulta_Usuarios(int _Estatus, string _Nombre, string _APaterno, string _AMaterno, int _Llave, ref Int32 _Codigo, ref string _Mensaje)
         {
             Usuarios _oUsuario = new Usuarios();
 
@@ -155,6 +156,12 @@ namespace NegocioFlr.Datos
                 _Parametro4.Direction = System.Data.ParameterDirection.Input;
                 _Parametro4.ParameterName = "@Ape_Mat";
                 _Parametro4.Value = _AMaterno;
+                //  Identificador del usuario
+                SqlParameter _Parametro5 = new SqlParameter();
+                _Parametro5.DbType = System.Data.DbType.Int32;
+                _Parametro5.Direction = System.Data.ParameterDirection.Input;
+                _Parametro5.ParameterName = "@Ide_Usr";
+                _Parametro5.Value = _Llave;
 
                 _Comando = new SqlCommand();
                 _Comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -164,6 +171,7 @@ namespace NegocioFlr.Datos
                 _Comando.Parameters.Add(_Parametro2);
                 _Comando.Parameters.Add(_Parametro3);
                 _Comando.Parameters.Add(_Parametro4);
+                _Comando.Parameters.Add(_Parametro5);
                 _Resultado = _Comando.ExecuteReader();
 
                 while (_Resultado.Read())
@@ -176,6 +184,12 @@ namespace NegocioFlr.Datos
                     usuarios.Ape_Mat = _Resultado.GetString(3);
                     usuarios.Cor_reo = _Resultado.GetString(4);
                     usuarios.Ide_Usr = _Resultado.GetInt32(5);
+                    if (_Llave > 0)
+                    {
+                        usuarios.Cve_Usr = _Resultado.GetString(6);
+                        usuarios.Pas_Usr = _Resultado.GetString(7);
+                        usuarios.Est_Usr = _Resultado.GetByte(8);
+                    }
 
                     lstUsuarios.Add(usuarios);
                 }
@@ -212,12 +226,18 @@ namespace NegocioFlr.Datos
             _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
             _Codigo = 0;
             _Mensaje = null;
-            _Contrasenia = null;
             bool _Resultado; 
 
             try
             {
-                _usuarios.Pas_Usr = _usuarios.genera_Pwd;
+                if (_Contrasenia.Trim() == string.Empty) 
+                {
+                    _usuarios.Pas_Usr = _usuarios.genera_Pwd;
+                }
+                else 
+                {
+                    _usuarios.Pas_Usr = _Contrasenia;
+                }
                 _Contrasenia = _usuarios.Pas_Usr;
 
                 _Conexion.Open();
@@ -338,12 +358,140 @@ namespace NegocioFlr.Datos
         }
 
         /// <summary>
-        /// Revisa si el usuario existe en el sistema
+        /// Actualización del usuario en el sistema 
         /// </summary>
         /// <param name="_usuarios">Clase usuario</param>
         /// <param name="_Codigo">Código de error</param>
         /// <param name="_Mensaje">Mensaje de error</param>
-        /// <returns>Verdadero o Falso</returns>
+        /// <returns></returns>
+        public Boolean actualiza_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
+        {
+            Usuarios _oUsuario = new Usuarios();
+
+            _Conexion.ConnectionString = _oUsuario.desencripta_Password(ConfigurationManager.AppSettings["Conexion"]);
+            _Codigo = 0;
+            _Mensaje = null;
+            bool _Resultado;
+
+            try
+            {
+                _Conexion.Open();
+
+                //  Parámetros:
+                //  Clave usuario
+                SqlParameter _Parametro1 = new SqlParameter();
+                _Parametro1.DbType = System.Data.DbType.String;
+                _Parametro1.Direction = System.Data.ParameterDirection.Input;
+                _Parametro1.ParameterName = "@Cve_Usr";
+                _Parametro1.Value = _usuarios.Cve_Usr;
+                //  Contraseña del usuario
+                SqlParameter _Parametro2 = new SqlParameter();
+                _Parametro2.DbType = System.Data.DbType.String;
+                _Parametro2.Direction = System.Data.ParameterDirection.Input;
+                _Parametro2.ParameterName = "@Pas_Usr";
+                _Parametro2.Value = _usuarios.encripta_Pwd;
+                //  Apellido paterno
+                SqlParameter _Parametro3 = new SqlParameter();
+                _Parametro3.DbType = System.Data.DbType.String;
+                _Parametro3.Direction = System.Data.ParameterDirection.Input;
+                _Parametro3.ParameterName = "@Ape_Pat";
+                _Parametro3.Value = _usuarios.Ape_Pat;
+                //  Apellido materno
+                SqlParameter _Parametro4 = new SqlParameter();
+                _Parametro4.DbType = System.Data.DbType.String;
+                _Parametro4.Direction = System.Data.ParameterDirection.Input;
+                _Parametro4.ParameterName = "@Ape_Mat";
+                _Parametro4.Value = _usuarios.Ape_Mat;
+                //  Nombre
+                SqlParameter _Parametro5 = new SqlParameter();
+                _Parametro5.DbType = System.Data.DbType.String;
+                _Parametro5.Direction = System.Data.ParameterDirection.Input;
+                _Parametro5.ParameterName = "@Nom_bre";
+                _Parametro5.Value = _usuarios.Nom_bre;
+                //  Correo electrónico
+                SqlParameter _Parametro6 = new SqlParameter();
+                _Parametro6.DbType = System.Data.DbType.String;
+                _Parametro6.Direction = System.Data.ParameterDirection.Input;
+                _Parametro6.ParameterName = "@Cor_reo";
+                _Parametro6.Value = _usuarios.Cor_reo;
+                //  Estatus
+                SqlParameter _Parametro7 = new SqlParameter();
+                _Parametro7.DbType = System.Data.DbType.Byte;
+                _Parametro7.Direction = System.Data.ParameterDirection.Input;
+                _Parametro7.ParameterName = "@Est_Usr";
+                _Parametro7.Value = _usuarios.Est_Usr;
+                //  Identificador del usuario
+                SqlParameter _Parametro8 = new SqlParameter();
+                _Parametro8.DbType = System.Data.DbType.Byte;
+                _Parametro8.Direction = System.Data.ParameterDirection.Input;
+                _Parametro8.ParameterName = "@Ide_Usr";
+                _Parametro8.Value = _usuarios.Ide_Usr;
+                //  Código de error
+                SqlParameter _Parametro9 = new SqlParameter();
+                _Parametro9.DbType = System.Data.DbType.Int32;
+                _Parametro9.Direction = System.Data.ParameterDirection.Output;
+                _Parametro9.Size = 4;
+                _Parametro9.ParameterName = "@Cod_Err";
+                //  Descripción de error
+                SqlParameter _Parametro10 = new SqlParameter();
+                _Parametro10.DbType = System.Data.DbType.String;
+                _Parametro10.Direction = System.Data.ParameterDirection.Output;
+                _Parametro10.Size = 100;
+                _Parametro10.ParameterName = "@Des_Err";
+
+                _Comando = new SqlCommand();
+                _Comando.CommandType = System.Data.CommandType.StoredProcedure;
+                _Comando.CommandText = "sp_Actualiza_Usuario";
+                _Comando.Connection = _Conexion;
+                _Comando.Parameters.Add(_Parametro1);
+                _Comando.Parameters.Add(_Parametro2);
+                _Comando.Parameters.Add(_Parametro3);
+                _Comando.Parameters.Add(_Parametro4);
+                _Comando.Parameters.Add(_Parametro5);
+                _Comando.Parameters.Add(_Parametro6);
+                _Comando.Parameters.Add(_Parametro7);
+                _Comando.Parameters.Add(_Parametro8);
+                _Comando.Parameters.Add(_Parametro9);
+                _Comando.Parameters.Add(_Parametro10);
+                _Comando.ExecuteNonQuery();
+
+                _Codigo = Convert.ToInt32(_Comando.Parameters["@Cod_Err"].Value);
+                _Mensaje = _Comando.Parameters["@Des_Err"].Value.ToString();
+
+                if (_Codigo == 0)
+                {
+                    _Resultado = true;
+                }
+                else
+                {
+                    _Resultado = false;
+                }
+            }
+            catch (SqlException Error)
+            {
+                _Codigo = Error.ErrorCode;
+                _Mensaje = Error.Message;
+                _Resultado = false;
+            }
+            finally
+            {
+                if (_Comando != null)
+                {
+                    _Comando.Dispose();
+                    _Conexion.Close();
+                }
+            }
+
+            return _Resultado;
+        }
+
+            /// <summary>
+            /// Revisa si el usuario existe en el sistema
+            /// </summary>
+            /// <param name="_usuarios">Clase usuario</param>
+            /// <param name="_Codigo">Código de error</param>
+            /// <param name="_Mensaje">Mensaje de error</param>
+            /// <returns>Verdadero o Falso</returns>
         public Boolean existe_Usuario(Usuarios _usuarios, ref Int32 _Codigo, ref string _Mensaje)
         {
             Usuarios _oUsuario = new Usuarios();

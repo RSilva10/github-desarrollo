@@ -41,7 +41,6 @@
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td style="align-content:end">
                             <asp:ImageButton ID="img_Alta" runat="server" ImageUrl="~/Imagenes/Alta.ico" Height="40px" Width="40px" ToolTip="Agregar usuario" OnClick="img_Alta_Click" />
                         </td>
@@ -50,7 +49,8 @@
                 <br />
                 <asp:GridView ID="grd_Usuarios" runat="server"  AutoGenerateColumns="False" 
                     EmptyDataText="No existen registros" EnableModelValidation="True"
-                    CssClass="table table-responsive" AllowPaging="true" PageSize="10">
+                    CssClass="table table-responsive" AllowPaging="true" PageSize="8"
+                    OnPageIndexChanging="grd_Usuarios_PageIndexChanging" OnRowCommand="grd_Usuarios_RowCommand" >
                     <Columns>
                         <asp:TemplateField HeaderText="Editar" HeaderStyle-BackColor="#b16363" HeaderStyle-ForeColor="White">
                             <ItemTemplate>
