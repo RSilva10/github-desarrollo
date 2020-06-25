@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using NegocioFlr.Entidades;
 using NegocioFlr.Negocio;
-using System.Text.RegularExpressions;
-using System.Security.AccessControl;
 
 namespace NegocioFlr.WebIU.Paginas
 {
@@ -18,8 +17,8 @@ namespace NegocioFlr.WebIU.Paginas
         private Utilerias _objUtilerias = new Utilerias();
         private List<Usuarios> _lstUsuarios;
         private string _sOpcion = string.Empty;
-        private Int32 _Codigo;
-        private String _Mensaje;
+        private Int32 _iCodigo;
+        private String _sMensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -54,13 +53,29 @@ namespace NegocioFlr.WebIU.Paginas
         }
 
         protected void grd_Usuarios_RowCommand(object sender, GridViewCommandEventArgs e)
-        {             
+        {
+            Usuarios _objCRUD = new Usuarios();
+            bool _bRespuesta = false;
+
             if (e.CommandName == "Editar_Registro")
             {
                 Response.Redirect("./Frm_Usuarios.aspx?Opcion=E&Key=" + e.CommandArgument.ToString());
             }
-            else
+            else if (e.CommandName == "Eliminar_Registro")
             {
+                _objCRUD.Ide_Usr = Convert.ToInt32(e.CommandArgument.ToString());
+
+                _bRespuesta = _objNegocioUsuario.elimina_Usuario(_objCRUD, ref _iCodigo, ref _sMensaje);
+                if (_bRespuesta == true)
+                {
+                    _objUtilerias.muestra_Mensaje(this, "!! Registro dado de baja ... ¡¡", 0);
+                    limpia_Grilla();
+                    carga_Usuarios();
+                }
+                else if (_iCodigo > 0)
+                {
+                    _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo + " " + _sMensaje + " ... ¡¡", 0);
+                }
             }
         }
 
@@ -77,8 +92,8 @@ namespace NegocioFlr.WebIU.Paginas
         /// </summary>
         protected void carga_Usuarios()
         {
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", 0, ref _Codigo, ref _Mensaje);
-            if (_Codigo == 0)
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", 0, ref _iCodigo, ref _sMensaje);
+            if (_iCodigo == 0)
             {
                 this.limpia_Grilla();
 
@@ -87,7 +102,7 @@ namespace NegocioFlr.WebIU.Paginas
             }
             else 
             {
-                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + " " + _Mensaje + " ... ¡¡", 0);
+                _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo + " " + _sMensaje + " ... ¡¡", 0);
             }
         }
 
@@ -113,8 +128,8 @@ namespace NegocioFlr.WebIU.Paginas
 
         protected void img_Buscar_Click(object sender, ImageClickEventArgs e)
         {
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, this.txt_Nombre.Value, this.txt_APaterno.Value, this.txt_AMaterno.Value, 0, ref _Codigo, ref _Mensaje);
-            if (_Codigo == 0)
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(3, this.txt_Nombre.Value, this.txt_APaterno.Value, this.txt_AMaterno.Value, 0, ref _iCodigo, ref _sMensaje);
+            if (_iCodigo == 0)
             {
                 limpia_Grilla();
 
@@ -129,15 +144,15 @@ namespace NegocioFlr.WebIU.Paginas
 
             _Elemento = Convert.ToInt32(this.ddl_Estatus.SelectedValue);
 
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(_Elemento , "", "", "", 0, ref _Codigo, ref _Mensaje);
-            if (_Codigo == 0) 
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuarios(_Elemento , "", "", "", 0, ref _iCodigo, ref _sMensaje);
+            if (_iCodigo == 0) 
             {
                 this.grd_Usuarios.DataSource = _lstUsuarios;
                 this.grd_Usuarios.DataBind();
             }
             else
             {
-                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + " " + _Mensaje + " ... ¡¡", 0);
+                _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo + " " + _sMensaje + " ... ¡¡", 0);
             }
         }
 

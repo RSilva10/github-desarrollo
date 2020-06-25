@@ -51,6 +51,15 @@ namespace NegocioFlr.WebIU.Paginas
         protected global::System.Web.UI.HtmlControls.HtmlInputText txt_AMaterno;
 
         /// <summary>
+        /// Control pnl_Buscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_Buscar;
+
+        /// <summary>
         /// Control img_Buscar.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace NegocioFlr.WebIU.Paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton img_Buscar;
+
+        /// <summary>
+        /// Control pnl_Alta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_Alta;
 
         /// <summary>
         /// Control img_Alta.
@@ -76,5 +94,14 @@ namespace NegocioFlr.WebIU.Paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grd_Usuarios;
+
+        /// <summary>
+        /// Control hdf_Confirmacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdf_Confirmacion;
     }
 }

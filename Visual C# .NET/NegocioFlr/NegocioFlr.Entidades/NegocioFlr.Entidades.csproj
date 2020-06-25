@@ -39,7 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clientes.cs" />
-    <Compile Include="ErrExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SesiUsrs.cs" />
     <Compile Include="Usuarios.cs" />

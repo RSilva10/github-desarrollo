@@ -18,8 +18,8 @@ namespace NegocioFlr.WebIU.Paginas
         private Usuarios _objUsuarios = new Usuarios();
         private UsuariosNegocio _objNegocioUsuario = new UsuariosNegocio();
         private Utilerias _objUtilerias = new Utilerias();
-        private Int32 _Codigo;
-        private String _Mensaje;
+        private Int32 _iCodigo;
+        private String _sMensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -50,9 +50,9 @@ namespace NegocioFlr.WebIU.Paginas
             _objUsuarios.Cor_reo = this.txt_Correo.Value;
             _objUsuarios.Ali_Cli = this.txt_Alias.Value;
 
-            if (!_objNegocioUsuario.registra_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje, ref _Contrasenia))
+            if (!_objNegocioUsuario.registra_Usuario(_objUsuarios, ref _iCodigo, ref _sMensaje, ref _Contrasenia))
             {
-                _objUtilerias.muestra_Mensaje(this, _Mensaje.Trim(), 3);
+                _objUtilerias.muestra_Mensaje(this, _sMensaje.Trim(), 3);
             }
             else
             {

@@ -1,4 +1,4 @@
-﻿Información Cambio Contraseña de Usuario:
+﻿Información Alta de Usuario:
 
 Clave usuario       :   RSilvav
 Contraseña usuario  :   SiViRo3366

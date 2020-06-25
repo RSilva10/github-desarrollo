@@ -2,11 +2,20 @@
 
 <asp:Content ID="ctt_Encabezado" runat="server" ContentPlaceHolderID="cph_Encabezado">
     <title>Catálogo de usuarios</title>
+    <script src="../Scripts/jquery-3.5.1.js"></script>
+    <script src="../Scripts/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+    <script src="../Scripts/toastr.js"></script>
+    <script src="../Scripts/toastr.min.js"></script>
+    <script src="../Scripts/Utilerias.js"></script>
+    <link href="../Scripts/bootstrap-4.5.0-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Estilos/toastr.css" rel="stylesheet" />
+    <link href="../Estilos/NegocioFlr.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="ctt_Cuerpo" runat="server" ContentPlaceHolderID="cph_Cuerpo">
     <div class="container">
-        <center><h4 style="color: black;">Catálogo de Usuarios</h4></center><p></p>
+        <center><h4 style="color: black;">Catálogo de Usuarios</h4></center>
+        <p></p>
         <div class="row">
             <div class="form-group">
                 <table style="height: 50px">
@@ -17,7 +26,7 @@
                             </div>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddl_Estatus" runat="server" CssClass="form-control" Height="32px" OnSelectedIndexChanged="ddl_Estatus_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+                            <asp:DropDownList ID="ddl_Estatus" runat="server" CssClass="form-control" Height="32px" OnSelectedIndexChanged="ddl_Estatus_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                         </td>
                     </tr>
                     <tr style="align-content: flex-start">
@@ -27,30 +36,34 @@
                             </div>
                         </td>
                         <td>
-                            <input id="txt_Nombre" type="text" runat="server" class="form-control" placeholder="Nombre" style="width: 120px; height:32px" />
+                            <input id="txt_Nombre" type="text" runat="server" class="form-control" placeholder="Nombre" style="width: 120px; height: 32px" />
                         </td>
                         <td>
-                            <input id="txt_APaterno" type="text" runat="server" class="form-control" placeholder="A. Paterno" style="width: 120px; height:32px" />
+                            <input id="txt_APaterno" type="text" runat="server" class="form-control" placeholder="A. Paterno" style="width: 120px; height: 32px" />
                         </td>
                         <td>
-                            <input id="txt_AMaterno" type="text" runat="server" class="form-control" placeholder="A. Materno" style="width: 120px; height:32px" />
+                            <input id="txt_AMaterno" type="text" runat="server" class="form-control" placeholder="A. Materno" style="width: 120px; height: 32px" />
                         </td>
                         <td>
-                            <asp:ImageButton ID="img_Buscar" runat="server" ImageUrl="~/Imagenes/Consultar.ico" Height="30px" Width="30px" ToolTip="Buscar usuario" OnClick="img_Buscar_Click" />
+                            <asp:Panel ID="pnl_Buscar" runat="server" BorderStyle="Outset">
+                                <asp:ImageButton ID="img_Buscar" runat="server" ImageUrl="~/Imagenes/Consultar.ico" Height="30px" Width="30px" ToolTip="Buscar usuario" OnClick="img_Buscar_Click" />
+                            </asp:Panel>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td style="align-content:end">
-                            <asp:ImageButton ID="img_Alta" runat="server" ImageUrl="~/Imagenes/Alta.ico" Height="40px" Width="40px" ToolTip="Agregar usuario" OnClick="img_Alta_Click" />
+                        <td style="align-content: end">
+                            <asp:Panel ID="pnl_Alta" runat="server" BorderStyle="Outset">
+                                <asp:ImageButton ID="img_Alta" runat="server" ImageUrl="~/Imagenes/Alta.ico" Height="40px" Width="40px" ToolTip="Agregar usuario" OnClick="img_Alta_Click" />
+                            </asp:Panel>
                         </td>
                     </tr>
                 </table>
                 <br />
-                <asp:GridView ID="grd_Usuarios" runat="server"  AutoGenerateColumns="False" 
+                <asp:GridView ID="grd_Usuarios" runat="server" AutoGenerateColumns="False"
                     EmptyDataText="No existen registros" EnableModelValidation="True"
                     CssClass="table table-responsive" AllowPaging="true" PageSize="8"
-                    OnPageIndexChanging="grd_Usuarios_PageIndexChanging" OnRowCommand="grd_Usuarios_RowCommand" >
+                    OnPageIndexChanging="grd_Usuarios_PageIndexChanging" OnRowCommand="grd_Usuarios_RowCommand" BorderStyle="Solid">
                     <Columns>
                         <asp:TemplateField HeaderText="Editar" HeaderStyle-BackColor="#b16363" HeaderStyle-ForeColor="White">
                             <ItemTemplate>
@@ -73,5 +86,6 @@
             </div>
         </div>
     </div>
+    <asp:HiddenField ID="hdf_Confirmacion" runat="server" />
 </asp:Content>
 

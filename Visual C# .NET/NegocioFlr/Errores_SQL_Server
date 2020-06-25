@@ -8,3 +8,5 @@ Numero		Descripción
 -106	-->	!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al registrar la sesion
 -107	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al eliminar la sesion)
 -108	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al actualizar el usuario)
+-109	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al eliminar el usuario)
+-110	-->	'!! ' + ERROR_MESSAGE() + '... ¡¡ (Error al actualizar vigencia)

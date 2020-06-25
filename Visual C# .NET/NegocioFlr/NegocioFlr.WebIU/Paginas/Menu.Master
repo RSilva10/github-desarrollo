@@ -46,7 +46,7 @@
                     </table>
                 </div>
                 <div class="col-sm-4" style="background-color: black;">
-                    <ul class="nav  justify-content-end">
+                    <ul class="nav  justify-content-end" id="mnu_Opciones" runat="server">
                         <li class="nav-item"><a href="Principal.aspx" class="nav-link" style="color: white">Inicio</a></li>
                         <li class="nav-item"><a href="Cat_Usuarios.aspx" class="nav-link" style="color: white">Usuarios</a></li>
                         <li class="nav-item">
@@ -57,7 +57,7 @@
             </div>
         </div>
         <footer class="fixed-bottom" style="background-color: black;">
-            <center><label id="lbl_CP" runat="server" style="color: white; font: bold; font-size: 15px"></label></center>            
+            <center><label id="lbl_CP" runat="server" style="color: white; font: bold; font-size: 15px"></label></center>
         </footer>
         <asp:ContentPlaceHolder ID="cph_Cuerpo" runat="server"></asp:ContentPlaceHolder>
     </form>

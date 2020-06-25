@@ -69,6 +69,15 @@ namespace NegocioFlr.WebIU.Paginas
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_Informativo;
 
         /// <summary>
+        /// Control mnu_Opciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mnu_Opciones;
+
+        /// <summary>
         /// Control btn_Logout.
         /// </summary>
         /// <remarks>

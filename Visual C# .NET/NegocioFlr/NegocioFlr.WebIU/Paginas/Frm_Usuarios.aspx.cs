@@ -20,8 +20,8 @@ namespace NegocioFlr.WebIU.Paginas
         private Utilerias _objUtilerias = new Utilerias();
         private string _sOpcion = string.Empty;
         private string _sLlave = string.Empty;
-        private Int32 _Codigo;
-        private String _Mensaje;
+        private Int32 _iCodigo;
+        private String _sMensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,20 +33,24 @@ namespace NegocioFlr.WebIU.Paginas
             else
             {
                 _objUsuarios = (Usuarios)Session["USR_INF"];
-                llena_Estatus();
 
                 _sOpcion = Request.QueryString.Get("Opcion");
-                if (_sOpcion == "A")
-                {
-                    this.ddl_Estatus.SelectedIndex = 0;
-                    this.ddl_Estatus.Enabled = false;
-                }
-                else 
-                {
-                    _sLlave = Request.QueryString.Get("Key");
+                _sLlave = Request.QueryString.Get("Key");
 
-                    this.ddl_Estatus.Enabled= true;
-                    carga_Usuario(_sLlave);
+                if (!IsPostBack) 
+                {
+                    llena_Estatus();
+
+                    if (_sOpcion == "A")
+                    {
+                        this.ddl_Estatus.SelectedIndex = 0;
+                        this.ddl_Estatus.Enabled = false;
+                    }
+                    else
+                    {
+                        this.ddl_Estatus.Enabled = true;
+                        carga_Usuario(_sLlave);
+                    }
                 }
             }
         }
@@ -80,7 +84,7 @@ namespace NegocioFlr.WebIU.Paginas
             _objCRUD.Fec_Ing = Convert.ToDateTime(DateTime.Today);
             _objCRUD.Fec_Vig = Convert.ToDateTime(DateTime.Today);
             _objCRUD.Cor_reo = this.txt_Correo.Value;
-            if (this.ddl_Estatus.SelectedItem.Value == "Activo") 
+            if (this.ddl_Estatus.SelectedItem.Value == "1") 
             {
                 _objCRUD.Est_Usr = 1;
             }
@@ -91,14 +95,14 @@ namespace NegocioFlr.WebIU.Paginas
 
             if (_sOpcion == "A") 
             {
-                _Resultado = _objNegocioUsuario.registra_Usuario(_objCRUD, ref _Codigo, ref _Mensaje, ref _Contrasenia);
+                _Resultado = _objNegocioUsuario.registra_Usuario(_objCRUD, ref _iCodigo, ref _sMensaje, ref _Contrasenia);
             }
             else 
             {
-                _Resultado = _objNegocioUsuario.actualiza_Usuario(_objCRUD, ref _Codigo, ref _Mensaje);
+                _Resultado = _objNegocioUsuario.actualiza_Usuario(_objCRUD, ref _iCodigo, ref _sMensaje);
             }
 
-            if (_Resultado == true && _Codigo == 0) 
+            if (_Resultado == true && _iCodigo == 0) 
             {
                 if (_sOpcion == "A") 
                 {
@@ -111,7 +115,7 @@ namespace NegocioFlr.WebIU.Paginas
             }
             else 
             {
-                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + ": " + _Mensaje.Trim() + " ... ¡¡", 3);
+                _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo + ": " + _sMensaje.Trim() + " ... ¡¡", 3);
             }
         }
 
@@ -182,7 +186,7 @@ namespace NegocioFlr.WebIU.Paginas
         { 
             List<Usuarios> _lstUsuario;
 
-            _lstUsuario = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", Convert.ToInt32(Llave), ref _Codigo, ref _Mensaje);
+            _lstUsuario = _objNegocioUsuario.regresa_Usuarios(3, "", "", "", Convert.ToInt32(Llave), ref _iCodigo, ref _sMensaje);
             if (_lstUsuario.Count > 0) 
             {
                 foreach (Usuarios _elemento in _lstUsuario)

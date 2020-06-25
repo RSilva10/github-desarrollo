@@ -15,8 +15,8 @@ namespace NegocioFlr.WebIU
         private Utilerias _objUtilerias = new Utilerias();
         private List<Usuarios> _lstUsuarios;
         private List<SesiUsrs> _lstSesiUsrs;
-        private Int32 _Codigo;
-        private String _Mensaje;
+        private Int32 _iCodigo;
+        private String _sMensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,16 +36,16 @@ namespace NegocioFlr.WebIU
             _objUsuarios.Pas_Usr = _objUsuarios.encripta_Password(this.txt_Password.Value);
             _objUsuarios.Ali_Cli = this.txt_Alias.Value;
 
-            if (! _objNegocioUsuario.existe_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje)) 
+            if (! _objNegocioUsuario.existe_Usuario(_objUsuarios, ref _iCodigo, ref _sMensaje)) 
             {
-                _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
+                _objUtilerias.muestra_Mensaje(this, _sMensaje, 3);
                 return;
             }
 
-            _lstUsuarios = _objNegocioUsuario.regresa_Usuario(_objUsuarios, ref _Codigo, ref _Mensaje);
-            if (_Codigo > 0)
+            _lstUsuarios = _objNegocioUsuario.regresa_Usuario(_objUsuarios, ref _iCodigo, ref _sMensaje);
+            if (_iCodigo > 0)
             {
-                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + ": " + _Mensaje.Trim() + " ... ¡¡", 3);
+                _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo + ": " + _sMensaje.Trim() + " ... ¡¡", 3);
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace NegocioFlr.WebIU
 
             if (this.chk_SActivas.Checked == true)
             {
-                _Resultado = _objNegocioSesiUsr.elimina_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje);
+                _Resultado = _objNegocioSesiUsr.elimina_Sesion(_objSesiUsrs, ref _iCodigo, ref _sMensaje);
                 if (_Resultado)
                 {
                     _objUtilerias.muestra_Mensaje(this, "!! Se eliminó la sesión activa de " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + " ... ¡¡", 0);
@@ -79,31 +79,31 @@ namespace NegocioFlr.WebIU
                 }
                 else
                 {
-                    _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo.ToString() + " " + _Mensaje.Trim() + " ... ¡¡", 3);
+                    _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo.ToString() + " " + _sMensaje.Trim() + " ... ¡¡", 3);
                 }
                 this.chk_SActivas.Checked = false;
 
                 return;
             }
 
-            if (! _objNegocioSesiUsr.existe_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje))
+            if (! _objNegocioSesiUsr.existe_Sesion(_objSesiUsrs, ref _iCodigo, ref _sMensaje))
             {
-                _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
+                _objUtilerias.muestra_Mensaje(this, _sMensaje, 3);
                 return;
             }
             else 
             { 
-                if (!_objNegocioSesiUsr.registra_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje)) 
+                if (!_objNegocioSesiUsr.registra_Sesion(_objSesiUsrs, ref _iCodigo, ref _sMensaje)) 
                 {
-                    _objUtilerias.muestra_Mensaje(this, _Mensaje, 3);
+                    _objUtilerias.muestra_Mensaje(this, _sMensaje, 3);
                     return;
                 }
                 else 
                 {
-                    _lstSesiUsrs = _objNegocioSesiUsr.regresa_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje);
-                    if (_Codigo > 0)
+                    _lstSesiUsrs = _objNegocioSesiUsr.regresa_Sesion(_objSesiUsrs, ref _iCodigo, ref _sMensaje);
+                    if (_iCodigo > 0)
                     {
-                        _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo + ": " + _Mensaje.Trim() + " ... ¡¡", 3);
+                        _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo + ": " + _sMensaje.Trim() + " ... ¡¡", 3);
                         return;
                     }
 

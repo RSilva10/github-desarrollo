@@ -20,11 +20,15 @@
                     <tr style="align-content: flex-start">
                         <td style="align-content: end">
                             <div>
-                                <asp:ImageButton ID="img_Guardar" runat="server" ImageUrl="~/Imagenes/Guardar.jpg" Height="30px" Width="30px" ToolTip="Guardar/Editar usuario" OnClick="img_Guardar_Click" />
-                                <asp:ImageButton ID="img_Limpiar" runat="server" ImageUrl="~/Imagenes/Limpiar.png" Height="30px" Width="30px" ToolTip="Limpiar campos" OnClick="img_Limpiar_Click"   />
-                                <asp:ImageButton ID="img_Cancelar" runat="server" ImageUrl="~/Imagenes/Cancelar.png" Height="30px" Width="30px" ToolTip="Cancelar proceso" OnClick="img_Cancelar_Click" />
+                                <asp:Panel ID="pnl_Botones" runat="server" BorderStyle="Outset">
+                                    <div>
+                                        <asp:ImageButton ID="img_Guardar" runat="server" ImageUrl="~/Imagenes/Guardar.jpg" Height="30px" Width="30px" ToolTip="Guardar/Editar usuario" OnClick="img_Guardar_Click" />
+                                        <asp:ImageButton ID="img_Limpiar" runat="server" ImageUrl="~/Imagenes/Limpiar.png" Height="30px" Width="30px" ToolTip="Limpiar campos" OnClick="img_Limpiar_Click" />
+                                        <asp:ImageButton ID="img_Cancelar" runat="server" ImageUrl="~/Imagenes/Cancelar.png" Height="30px" Width="30px" ToolTip="Cancelar proceso" OnClick="img_Cancelar_Click" />
+                                    </div>
+                                </asp:Panel>
                             </div>
-                        </td>
+                        </td>                        
                     </tr>
                 </table>
             </div>
@@ -33,7 +37,7 @@
             <table style="height: 120px">
                 <tr>
                     <td>
-                        <label style="color: red">Usuario:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Usuario:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
@@ -41,7 +45,7 @@
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
-                        <label style="color: red">Contraseña:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Contraseña:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
@@ -60,7 +64,7 @@
                 <tr></tr>
                 <tr>
                     <td>
-                        <label style="color: red">Apellido Paterno:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Apellido Paterno:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
@@ -68,7 +72,7 @@
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
-                        <label style="color: red">Apellido Materno:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Apellido Materno:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
@@ -81,7 +85,7 @@
                     <td>
                         <br />
                         <br />
-                        <label style="color: red">Nombre:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Nombre:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
@@ -93,7 +97,7 @@
                     <td>
                         <br />
                         <br />
-                        <label style="color: red">Correo electrónico:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Correo electrónico:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
@@ -106,13 +110,20 @@
                     <td>
                         <br />
                         <br />
-                        <label style="color: red">Estatus:</label>
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Estatus:</label>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>
                         <br />
                         <br />
-                        <asp:DropDownList ID="ddl_Estatus" runat="server" CssClass="form-control" Height="32px" ></asp:DropDownList>
+                        <asp:DropDownList ID="ddl_Estatus" runat="server" CssClass="form-control" Height="32px"></asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        <br />
+                        <label style="color:red;font-size:xx-large">* </label><label style="color: black">Campos obligatorios</label>
                     </td>
                 </tr>
             </table>

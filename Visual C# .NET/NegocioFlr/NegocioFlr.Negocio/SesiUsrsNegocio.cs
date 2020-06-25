@@ -14,24 +14,24 @@ namespace NegocioFlr.Negocio
         #endregion
 
         #region Métodos
-        public List<SesiUsrs> regresa_Sesion(SesiUsrs _sesiusrs, ref Int32 _Codigo, ref string _Mensaje)
+        public List<SesiUsrs> regresa_Sesion(SesiUsrs _oSesiusrs, ref Int32 _iCodigo, ref string _sMensaje)
         {
-            return _objDatosSesiUsrs.consulta_Sesion(_sesiusrs, ref _Codigo, ref _Mensaje);
+            return _objDatosSesiUsrs.consulta_Sesion(_oSesiusrs, ref _iCodigo, ref _sMensaje);
         }
 
-        public Boolean existe_Sesion(SesiUsrs _sesiusrs, ref Int32 _Codigo, ref string _Mensaje) 
+        public Boolean existe_Sesion(SesiUsrs _oSesiusrs, ref Int32 _iCodigo, ref string _sMensaje) 
         {
-            return _objDatosSesiUsrs.existe_Sesion(_sesiusrs, ref _Codigo, ref _Mensaje);
+            return _objDatosSesiUsrs.existe_Sesion(_oSesiusrs, ref _iCodigo, ref _sMensaje);
         }
 
-        public Boolean registra_Sesion(SesiUsrs _sesiusrs, ref Int32 _Codigo, ref string _Mensaje) 
+        public Boolean registra_Sesion(SesiUsrs _oSesiusrs, ref Int32 _iCodigo, ref string _sMensaje) 
         {
-            return _objDatosSesiUsrs.registra_Sesion(_sesiusrs, ref _Codigo, ref _Mensaje);
+            return _objDatosSesiUsrs.registra_Sesion(_oSesiusrs, ref _iCodigo, ref _sMensaje);
         }
 
-        public Boolean elimina_Sesion(SesiUsrs _sesiusrs, ref Int32 _Codigo, ref string _Mensaje) 
+        public Boolean elimina_Sesion(SesiUsrs _oSesiusrs, ref Int32 _iCodigo, ref string _sMensaje) 
         {
-            return _objDatosSesiUsrs.elimina_Sesion(_sesiusrs, ref _Codigo, ref _Mensaje);
+            return _objDatosSesiUsrs.elimina_Sesion(_oSesiusrs, ref _iCodigo, ref _sMensaje);
         }
         #endregion
     }

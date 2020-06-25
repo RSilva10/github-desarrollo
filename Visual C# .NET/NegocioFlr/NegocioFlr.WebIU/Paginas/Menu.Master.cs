@@ -11,18 +11,17 @@ namespace NegocioFlr.WebIU.Paginas
         private Usuarios _objUsuarios = new Usuarios();
         private SesiUsrs _objSesiUsrs = new SesiUsrs();
         private SesiUsrsNegocio _objNegocioSesiUsr = new SesiUsrsNegocio();
+        private UsuariosNegocio _objUsuarioNegocio = new UsuariosNegocio();
         private Utilerias _objUtilerias = new Utilerias();
-        private Int32 _Codigo;
-        private String _Mensaje;
+        private Int32 _iCodigo;
+        private String _sMensaje;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string _sCadena = string.Empty;
-            DateTime _Hoy = DateTime.Today;
-            DateTime _Limite = _Hoy.AddDays(30);
-            TimeSpan _Vigencia;
-                         
+            Usuarios _objVigencia = new Usuarios();
+            int _iVigencia = 0;
+            
             if (Session["USR_INF"] == null || Session["USR_SES"] == null)
             {
                 Response.Redirect("~/Login.aspx");
@@ -34,12 +33,19 @@ namespace NegocioFlr.WebIU.Paginas
 
                 if (!IsPostBack)
                 {
-                    if (_objUsuarios.Ico_Cli.Trim() != "") 
+                    _objVigencia.Ide_Usr = _objUsuarios.Ide_Usr;
+                    _iVigencia = _objUsuarioNegocio.dias_Vigencia(_objVigencia, ref _iCodigo, ref _sMensaje);
+                    if (_iCodigo != 0)
+                    {
+                        _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo.ToString() + " " + _sMensaje.Trim() + " ... ¡¡", 3);
+                    }
+
+                    if (_objUsuarios.Ico_Cli.Trim() != "")
                     {
                         this.img_Logo.ImageUrl = "~/Imagenes/Empresas/" + _objUsuarios.Ico_Cli + "";
                     }
 
-                    _sCadena = _objUsuarios.Rso_Cli.Trim() + "<br></br>";
+                    string _sCadena = _objUsuarios.Rso_Cli.Trim() + "<br></br>";
                     _sCadena += _objUsuarios.Cal_Cli.Trim() + "<br>";
                     _sCadena += _objUsuarios.Col_Cli.Trim() + "<br>";
                     _sCadena += "Ext: " + _objUsuarios.NEx_Cli.Trim() + ", Int: " + _objUsuarios.NIn_Cli.Trim() + "<br>";
@@ -49,11 +55,8 @@ namespace NegocioFlr.WebIU.Paginas
                     _sCadena = "Bienvenido " + _objUsuarios.Nom_bre.Trim() + " " + _objUsuarios.Ape_Pat.Trim() + " " + _objUsuarios.Ape_Mat.Trim() + ":";
                     this.lbl_Bienvenido.InnerHtml = _sCadena;
 
-                    _Vigencia = _Limite - _objUsuarios.Fec_Vig;
-
-                    _sCadena = "( Fecha vigencia acceso: " + _objUsuarios.Fec_Vig.Date.ToString().Substring(0, 10) + ", Días vigencia acceso: " + _Vigencia.ToString().Substring(0, 2) + " )";
+                    _sCadena = "( Fecha vigencia acceso: " + _objUsuarios.Fec_Vig.Date.ToString().Substring(0, 10) + ", Días vigencia acceso: " + _iVigencia.ToString() + " )";
                     this.lbl_Informativo.InnerHtml = _sCadena;
-
 
                     this.lbl_CP.InnerHtml = "Desarrollo de Aplicaciones a la Medida &copy; Copyrigth " + DateTime.Now.Year.ToString() + " todos los derechos reservados.";
                 }
@@ -64,14 +67,14 @@ namespace NegocioFlr.WebIU.Paginas
         {
             bool _Resultado;
 
-            _Resultado = _objNegocioSesiUsr.elimina_Sesion(_objSesiUsrs, ref _Codigo, ref _Mensaje);
+            _Resultado = _objNegocioSesiUsr.elimina_Sesion(_objSesiUsrs, ref _iCodigo, ref _sMensaje);
             if (_Resultado) 
             {
                 Session.Abandon();
             }
             else 
             {
-                _objUtilerias.muestra_Mensaje(this, "!! " + _Codigo.ToString() + " " + _Mensaje.Trim() + " ... ¡¡", 3);
+                _objUtilerias.muestra_Mensaje(this, "!! " + _iCodigo.ToString() + " " + _sMensaje.Trim() + " ... ¡¡", 3);
             }
 
             Response.Redirect("~/Login.aspx");

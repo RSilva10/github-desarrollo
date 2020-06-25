@@ -15,19 +15,21 @@ namespace NegocioFlr.WebIU
         /// <summary>
         /// Muestra un mensaje en pantalla 
         /// </summary>
-        /// <param name="control">Controles de la página</param>
-        /// <param name="_mensaje">Descripción del mensaje</param>
-        /// <param name="_tipomensaje">Tipo de mensaje a mostrar:
+        /// <param name="_oControl">Controles de la página</param>
+        /// <param name="_sMensaje">Descripción del mensaje</param>
+        /// <param name="_iTipomensaje">Tipo de mensaje a mostrar:
         ///                            0 = Informacion
         ///                            1 = Precaucion
         ///                            2 = Satisfactorio
         ///                            3 = Error
         /// </param>
-        public void muestra_Mensaje(Control control, string _mensaje, int _tipomensaje)
+        public void muestra_Mensaje(Control _oControl, string _sMensaje, int _iTipomensaje)
         {
-            string _script = "muestra_Mensaje('" + _mensaje.Trim() + "', " + _tipomensaje + ");";
+            _sMensaje = _sMensaje.Replace("'", "");
 
-            control.Page.ClientScript.RegisterStartupScript(control.GetType(), "muestra_Mensaje", _script, true);
+            string _sScript = "muestra_Mensaje('" + _sMensaje.Trim() + "', " + _iTipomensaje + ");";
+                
+            _oControl.Page.ClientScript.RegisterStartupScript(_oControl.GetType(), "muestra_Mensaje", _sScript, true);
         }
     }
 }
